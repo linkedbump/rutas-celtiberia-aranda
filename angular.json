@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ar-anda-lite:build:production"
+              "buildTarget": "ar-anda-lite:build:production"
             },
             "development": {
-              "browserTarget": "ar-anda-lite:build:development"
+              "buildTarget": "ar-anda-lite:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ar-anda-lite:build"
+            "buildTarget": "ar-anda-lite:build"
           }
         },
         "test": {
