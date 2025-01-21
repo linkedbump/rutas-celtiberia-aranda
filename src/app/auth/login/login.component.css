@@ -1,0 +1,113 @@
+.container {
+    margin-top: 150px;
+}/* Estilos principales */
+.login-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  margin-top: 150px;
+}
+
+h2 {
+  font-size: 1.2em;
+  color: #4a4a4a;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin: 10px 0;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 1em;
+}
+
+.forgot-password {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.9em;
+  color: #6d6d6d;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--accent-color);
+  color: #f8f7f7;
+  border: none;
+  border-radius: 20px;
+  font-size: 1em;
+  cursor: pointer;
+  margin: 15px 0;
+
+  :hover{
+    color: var(--accent-color);
+    background-color: #f8f7f7;
+  }
+}
+
+.register-link {
+  color: #6d4ca5;
+  font-weight: bold;
+}
+
+.separator {
+  margin: 20px 0;
+  font-size: 0.9em;
+  color: #888;
+}
+
+.social-login {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+}
+
+.facebook {
+  background-color: #1877f2;
+}
+
+.google {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.apple {
+  background-color: #000;
+}
+
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f2f2f2;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.bottom-nav a {
+  color: #4a4a4a;
+  text-align: center;
+  font-size: 0.9em;
+}

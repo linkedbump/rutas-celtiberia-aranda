@@ -1,0 +1,27 @@
+<section id="EventsCarousel">
+  <div class="events-carousel">
+    <div class="events-header">
+      <h2>Proximos Eventos</h2>
+      <p>Ocio, entretenimiento y tradición</p>
+    </div>
+
+    <div class="carousel">
+      <div class="slides" *ngFor="let item of eventsItems.slice(currentSlide, currentSlide + 2); let i = index" [class.active]="i === 0">
+        <div class="slide-item">
+          <img [src]="item.imageUrl" [alt]="item.name" class="card-img-top">
+          <div class="card-body">
+            <div class="slide-caption">{{ item.name }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="dots">
+      <span *ngFor="let item of eventsItems; let i = index" 
+            [class.active]="i === currentSlide"
+            (click)="goToSlide(i)">
+      </span>
+    </div>
+
+  </div>   
+</section>

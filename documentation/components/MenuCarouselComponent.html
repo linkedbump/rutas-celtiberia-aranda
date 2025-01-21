@@ -1,0 +1,1823 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ar-anda-lite documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">ar-anda-lite documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  MenuCarouselComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/start/components/menu-carousel/menu-carousel.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>AfterViewInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-menu-carousel</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>NgFor</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">styles</td>
+                <td class="col-md-9"><code>
+  .menu-carousel {
+    padding-top: 50px;
+    text-align: left;
+    margin-left: 50px;
+    
+  }
+  .menu-header {
+      h2 {
+        font-family: &#x27;Raleway&#x27;, sans-serif;
+        font-size: 30px;
+        color: var(--primary-dark);
+        margin: 0;
+        font-weight: 800;       
+
+      }
+
+      p {
+        font-family: &#x27;Source Sans Pro&#x27;, sans-serif;
+        font-size: 14px;
+        color: #6e6e6e;
+        margin: 5px 0 20px;
+      }
+    }
+    .menu-carousel-container {
+      width: 100%;
+      overflow: hidden;
+      padding: 20px 0;
+    }
+
+    .menu-items {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
+      width: 100%;
+      min-width: calc(80px * 5);
+      padding: 0 10px; /* Añadido padding general*/
+    }
+
+    .menu-items::-webkit-scrollbar {
+      display: none;
+    }
+
+    .menu-item {
+      flex: 0 0 auto;
+      width: calc(100% / 4.5);
+      min-width: 100px;
+      scroll-snap-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 5px;
+    }
+
+    .icon-circle {
+      width: 100px;
+      height: 100px;
+      background-color: #f8f9fa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    
+      &amp;:hover {
+        box-shadow: 3px 3px 4px rgba(255, 255, 255, 0.8), 
+                     inset 4px 4px 10px rgba(76, 56, 133, 0.5);
+                     background: rgba(224, 216, 233, 0.3); 
+      }
+    }
+
+    .menu-label {
+      font-size: 12px;
+      text-align: center;
+      color: #4c3885;
+      white-space: nowrap;
+    }
+
+    .iconify {
+      font-size: 40px;
+      color: #4c3885;
+     
+    }
+
+    iconify-icon {
+      width: 60px !important;  /* Añadido !important para asegurar que se aplica*/
+      height: 60px !important; /* Añadido !important para asegurar que se aplica*/
+      color: #4c3885;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 60px !important; /* Añadido para asegurar el tamaño del icono*/
+    }
+
+    .tabler--tower {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    --svg: url(&quot;data:image/svg+xml,%3Csvg xmlns&#x3D;&#x27;http://www.w3.org/2000/svg&#x27; viewBox&#x3D;&#x27;0 0 24 24&#x27;%3E%3Cg fill&#x3D;&#x27;none&#x27; stroke&#x3D;&#x27;%23000&#x27; stroke-linecap&#x3D;&#x27;round&#x27; stroke-linejoin&#x3D;&#x27;round&#x27; stroke-width&#x3D;&#x27;0.5&#x27;%3E%3Cpath d&#x3D;&#x27;M5 3h1a1 1 0 0 1 1 1v2h3V4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2h3V4a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v4.394a2 2 0 0 1-.336 1.11l-1.328 1.992a2 2 0 0 0-.336 1.11V20a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-7.394a2 2 0 0 0-.336-1.11L4.336 9.504A2 2 0 0 1 4 8.394V4a1 1 0 0 1 1-1&#x27;/%3E%3Cpath d&#x3D;&#x27;M10 21v-5a2 2 0 1 1 4 0v5&#x27;/%3E%3C/g%3E%3C/svg%3E&quot;);
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}
+/* Media queries */
+@media (max-width: 768px) {
+      .menu-items {
+        min-width: calc(60px * 3);
+        padding: 0 5px;
+      }
+
+      .menu-item {
+        width: calc(100% / 3); /* Mostrar 3 elementos por vista*/
+        min-width: 80px;
+        padding: 0 3px;
+      }
+
+      .icon-circle {
+        width: 90px;  /* Círculos más pequeños*/
+        height: 90px;
+        margin-bottom: 4px;
+      }
+
+      iconify-icon {
+        width: 40px !important;  /* Iconos más pequeños*/
+        height: 40px !important;
+        font-size: 40px !important;
+      }
+
+      .menu-label {
+        font-size: 12px;  /* Texto más pequeño*/
+      }
+    }
+
+    /* Media query muy pequeños*/
+    @media (max-width: 320px) {
+      .menu-items {
+        min-width: calc(50px * 2.5);
+      }
+
+      .menu-item {
+        width: calc(100% / 2.5); /* Mostrar 2.5 elementos por vista*/
+        min-width: 70px;
+      }
+
+      .icon-circle {
+        width: 60px;
+        height: 60px;
+      }
+
+      iconify-icon {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 35px !important;
+      }
+
+      .menu-label {
+        font-size: 9px;
+      }
+    }
+  </code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;menu-carousel&quot;&gt;
+              &lt;div class&#x3D;&quot;menu-header&quot;&gt;
+                &lt;h2&gt;Descurbe&lt;/h2&gt;
+                &lt;p&gt;Lo que tiene para ofrecer&lt;/p&gt;
+              &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;menu-carousel-container&quot;&gt;
+    &lt;div class&#x3D;&quot;menu-items&quot; #menuContainer
+         (touchstart)&#x3D;&quot;onTouchStart($event)&quot;
+         (touchmove)&#x3D;&quot;onTouchMove($event)&quot;
+         (touchend)&#x3D;&quot;onTouchEnd()&quot;
+         (mousedown)&#x3D;&quot;onMouseDown($event)&quot;
+         (mousemove)&#x3D;&quot;onMouseMove($event)&quot;
+         (mouseup)&#x3D;&quot;onMouseUp()&quot;
+         (mouseleave)&#x3D;&quot;onMouseUp()&quot;&gt;
+      &lt;div *ngFor&#x3D;&quot;let item of menuItems&quot; class&#x3D;&quot;menu-item&quot; (click)&#x3D;&quot;navigateTo(item.link)&quot;&gt;
+        &lt;div class&#x3D;&quot;icon-circle&quot;&gt;
+          &lt;iconify-icon [icon]&#x3D;&quot;item.icon&quot;&gt;&lt;/iconify-icon&gt;
+        &lt;/div&gt;
+        &lt;span class&#x3D;&quot;menu-label&quot;&gt;{{item.label}}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isMouseDown" >isMouseDown</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#menuContainer" >menuContainer</a>
+                            </li>
+                            <li>
+                                <a href="#menuItems" >menuItems</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#mouseScrollLeft" >mouseScrollLeft</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#mouseStartX" >mouseStartX</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#scrollLeft" >scrollLeft</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#startX" >startX</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#navigateTo" >navigateTo</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#onMouseDown" >onMouseDown</a>
+                            </li>
+                            <li>
+                                <a href="#onMouseMove" >onMouseMove</a>
+                            </li>
+                            <li>
+                                <a href="#onMouseUp" >onMouseUp</a>
+                            </li>
+                            <li>
+                                <a href="#onTouchEnd" >onTouchEnd</a>
+                            </li>
+                            <li>
+                                <a href="#onTouchMove" >onTouchMove</a>
+                            </li>
+                            <li>
+                                <a href="#onTouchStart" >onTouchStart</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateTo"></a>
+                    <span class="name">
+                        <span ><b>navigateTo</b></span>
+                        <a href="#navigateTo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateTo(link: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="328"
+                                    class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:328</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>link</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="259"
+                                    class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:259</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onMouseDown"></a>
+                    <span class="name">
+                        <span ><b>onMouseDown</b></span>
+                        <a href="#onMouseDown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onMouseDown(e: MouseEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="296"
+                                    class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:296</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>e</td>
+                                            <td>
+                                                        <code>MouseEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onMouseMove"></a>
+                    <span class="name">
+                        <span ><b>onMouseMove</b></span>
+                        <a href="#onMouseMove"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onMouseMove(e: MouseEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="304"
+                                    class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:304</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>e</td>
+                                            <td>
+                                                        <code>MouseEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onMouseUp"></a>
+                    <span class="name">
+                        <span ><b>onMouseUp</b></span>
+                        <a href="#onMouseUp"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onMouseUp()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="313"
+                                    class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:313</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onTouchEnd"></a>
+                    <span class="name">
+                        <span ><b>onTouchEnd</b></span>
+                        <a href="#onTouchEnd"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onTouchEnd()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="281"
+                                    class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:281</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onTouchMove"></a>
+                    <span class="name">
+                        <span ><b>onTouchMove</b></span>
+                        <a href="#onTouchMove"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onTouchMove(e: TouchEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="272"
+                                    class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:272</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>e</td>
+                                            <td>
+                                                        <code>TouchEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onTouchStart"></a>
+                    <span class="name">
+                        <span ><b>onTouchStart</b></span>
+                        <a href="#onTouchStart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onTouchStart(e: TouchEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="265"
+                                    class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:265</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>e</td>
+                                            <td>
+                                                        <code>TouchEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isMouseDown"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isMouseDown</b></span>
+                        <a href="#isMouseDown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="216" class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:216</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="menuContainer"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>menuContainer</b></span>
+                        <a href="#menuContainer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ElementRef&lt;HTMLElement&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;menuContainer&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="212" class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:212</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="menuItems"></a>
+                    <span class="name">
+                        <span ><b>menuItems</b></span>
+                        <a href="#menuItems"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/MenuItem.html" target="_self" >MenuItem[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+      icon: &#x27;material-symbols-light:hiking&#x27;,
+      label: &#x27;RUTAS&#x27;,
+      link: &#x27;/rutas&#x27;
+    },
+    {
+      icon: &#x27;ph:castle-turret-light&#x27;,
+      label: &#x27;PUNTOS DE INTERÉS&#x27;,
+      link: &#x27;/puntos&#x27;
+    },
+    {
+      icon: &#x27;ph:farm-thin&#x27;,
+      label: &#x27;ALOJAMIENTO&#x27;,
+      link: &#x27;/alojamiento&#x27;
+    },
+    {
+      icon: &#x27;ph:fork-knife-thin&#x27;,
+      label: &#x27;GASTRONOMÍA&#x27;,
+      link: &#x27;/gastronomia&#x27;
+    },
+    {
+      icon: &#x27;ph:tree-thin&#x27;,
+      label: &#x27;NATURALEZA&#x27;,
+      link: &#x27;/naturaleza&#x27;
+    },
+    {
+      icon: &#x27;ph:balloon-thin&#x27;,
+      label: &#x27;EVENTOS&#x27;,
+      link: &#x27;/eventos&#x27;
+    },
+    {
+      icon: &#x27;material-symbols-light:linked-services-outline&#x27;,
+      label: &#x27;SERVICIOS&#x27;,
+      link: &#x27;/servicios&#x27;
+    }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="221" class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:221</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mouseScrollLeft"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>mouseScrollLeft</b></span>
+                        <a href="#mouseScrollLeft"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="218" class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:218</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mouseStartX"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>mouseStartX</b></span>
+                        <a href="#mouseStartX"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="217" class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:217</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scrollLeft"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>scrollLeft</b></span>
+                        <a href="#scrollLeft"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="215" class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:215</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startX"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>startX</b></span>
+                        <a href="#startX"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="214" class="link-to-prism">src/app/components/start/components/menu-carousel/menu-carousel.component.ts:214</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgFor } from &#x27;@angular/common&#x27;;
+import { Component, AfterViewInit, ViewChild, ElementRef, CUSTOM_ELEMENTS_SCHEMA } from &#x27;@angular/core&#x27;;
+import &#x27;iconify-icon&#x27;;
+
+interface MenuItem {
+  icon: string;
+  label: string;
+  link: string;
+}
+
+@Component({
+  selector: &#x27;app-menu-carousel&#x27;,
+  standalone: true,
+  imports: [NgFor],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: &#x60;
+  &lt;div class&#x3D;&quot;menu-carousel&quot;&gt;
+                &lt;div class&#x3D;&quot;menu-header&quot;&gt;
+                  &lt;h2&gt;Descurbe&lt;/h2&gt;
+                  &lt;p&gt;Lo que tiene para ofrecer&lt;/p&gt;
+                &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;menu-carousel-container&quot;&gt;
+      &lt;div class&#x3D;&quot;menu-items&quot; #menuContainer 
+           (touchstart)&#x3D;&quot;onTouchStart($event)&quot;
+           (touchmove)&#x3D;&quot;onTouchMove($event)&quot;
+           (touchend)&#x3D;&quot;onTouchEnd()&quot;
+           (mousedown)&#x3D;&quot;onMouseDown($event)&quot;
+           (mousemove)&#x3D;&quot;onMouseMove($event)&quot;
+           (mouseup)&#x3D;&quot;onMouseUp()&quot;
+           (mouseleave)&#x3D;&quot;onMouseUp()&quot;&gt;
+        &lt;div *ngFor&#x3D;&quot;let item of menuItems&quot; class&#x3D;&quot;menu-item&quot; (click)&#x3D;&quot;navigateTo(item.link)&quot;&gt;
+          &lt;div class&#x3D;&quot;icon-circle&quot;&gt;
+            &lt;iconify-icon [icon]&#x3D;&quot;item.icon&quot;&gt;&lt;/iconify-icon&gt;
+          &lt;/div&gt;
+          &lt;span class&#x3D;&quot;menu-label&quot;&gt;{{item.label}}&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;,
+  styles: [&#x60;
+  .menu-carousel {
+    padding-top: 50px;
+    text-align: left;
+    margin-left: 50px;
+    
+  }
+  .menu-header {
+      h2 {
+        font-family: &#x27;Raleway&#x27;, sans-serif;
+        font-size: 30px;
+        color: var(--primary-dark);
+        margin: 0;
+        font-weight: 800;       
+
+      }
+
+      p {
+        font-family: &#x27;Source Sans Pro&#x27;, sans-serif;
+        font-size: 14px;
+        color: #6e6e6e;
+        margin: 5px 0 20px;
+      }
+    }
+    .menu-carousel-container {
+      width: 100%;
+      overflow: hidden;
+      padding: 20px 0;
+    }
+
+    .menu-items {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
+      width: 100%;
+      min-width: calc(80px * 5);
+      padding: 0 10px; /* Añadido padding general*/
+    }
+
+    .menu-items::-webkit-scrollbar {
+      display: none;
+    }
+
+    .menu-item {
+      flex: 0 0 auto;
+      width: calc(100% / 4.5);
+      min-width: 100px;
+      scroll-snap-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 5px;
+    }
+
+    .icon-circle {
+      width: 100px;
+      height: 100px;
+      background-color: #f8f9fa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    
+      &amp;:hover {
+        box-shadow: 3px 3px 4px rgba(255, 255, 255, 0.8), 
+                     inset 4px 4px 10px rgba(76, 56, 133, 0.5);
+                     background: rgba(224, 216, 233, 0.3); 
+      }
+    }
+
+    .menu-label {
+      font-size: 12px;
+      text-align: center;
+      color: #4c3885;
+      white-space: nowrap;
+    }
+
+    .iconify {
+      font-size: 40px;
+      color: #4c3885;
+     
+    }
+
+    iconify-icon {
+      width: 60px !important;  /* Añadido !important para asegurar que se aplica*/
+      height: 60px !important; /* Añadido !important para asegurar que se aplica*/
+      color: #4c3885;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 60px !important; /* Añadido para asegurar el tamaño del icono*/
+    }
+
+    .tabler--tower {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    --svg: url(&quot;data:image/svg+xml,%3Csvg xmlns&#x3D;&#x27;http://www.w3.org/2000/svg&#x27; viewBox&#x3D;&#x27;0 0 24 24&#x27;%3E%3Cg fill&#x3D;&#x27;none&#x27; stroke&#x3D;&#x27;%23000&#x27; stroke-linecap&#x3D;&#x27;round&#x27; stroke-linejoin&#x3D;&#x27;round&#x27; stroke-width&#x3D;&#x27;0.5&#x27;%3E%3Cpath d&#x3D;&#x27;M5 3h1a1 1 0 0 1 1 1v2h3V4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2h3V4a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v4.394a2 2 0 0 1-.336 1.11l-1.328 1.992a2 2 0 0 0-.336 1.11V20a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-7.394a2 2 0 0 0-.336-1.11L4.336 9.504A2 2 0 0 1 4 8.394V4a1 1 0 0 1 1-1&#x27;/%3E%3Cpath d&#x3D;&#x27;M10 21v-5a2 2 0 1 1 4 0v5&#x27;/%3E%3C/g%3E%3C/svg%3E&quot;);
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}
+/* Media queries */
+@media (max-width: 768px) {
+      .menu-items {
+        min-width: calc(60px * 3);
+        padding: 0 5px;
+      }
+
+      .menu-item {
+        width: calc(100% / 3); /* Mostrar 3 elementos por vista*/
+        min-width: 80px;
+        padding: 0 3px;
+      }
+
+      .icon-circle {
+        width: 90px;  /* Círculos más pequeños*/
+        height: 90px;
+        margin-bottom: 4px;
+      }
+
+      iconify-icon {
+        width: 40px !important;  /* Iconos más pequeños*/
+        height: 40px !important;
+        font-size: 40px !important;
+      }
+
+      .menu-label {
+        font-size: 12px;  /* Texto más pequeño*/
+      }
+    }
+
+    /* Media query muy pequeños*/
+    @media (max-width: 320px) {
+      .menu-items {
+        min-width: calc(50px * 2.5);
+      }
+
+      .menu-item {
+        width: calc(100% / 2.5); /* Mostrar 2.5 elementos por vista*/
+        min-width: 70px;
+      }
+
+      .icon-circle {
+        width: 60px;
+        height: 60px;
+      }
+
+      iconify-icon {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 35px !important;
+      }
+
+      .menu-label {
+        font-size: 9px;
+      }
+    }
+  &#x60;]
+})
+export class MenuCarouselComponent implements AfterViewInit {
+  @ViewChild(&#x27;menuContainer&#x27;) menuContainer!: ElementRef&lt;HTMLElement&gt;;
+  
+  private startX: number &#x3D; 0;
+  private scrollLeft: number &#x3D; 0;
+  private isMouseDown: boolean &#x3D; false;
+  private mouseStartX: number &#x3D; 0;
+  private mouseScrollLeft: number &#x3D; 0;
+
+
+  menuItems: MenuItem[] &#x3D; [
+    {
+      icon: &#x27;material-symbols-light:hiking&#x27;,
+      label: &#x27;RUTAS&#x27;,
+      link: &#x27;/rutas&#x27;
+    },
+    {
+      icon: &#x27;ph:castle-turret-light&#x27;,
+      label: &#x27;PUNTOS DE INTERÉS&#x27;,
+      link: &#x27;/puntos&#x27;
+    },
+    {
+      icon: &#x27;ph:farm-thin&#x27;,
+      label: &#x27;ALOJAMIENTO&#x27;,
+      link: &#x27;/alojamiento&#x27;
+    },
+    {
+      icon: &#x27;ph:fork-knife-thin&#x27;,
+      label: &#x27;GASTRONOMÍA&#x27;,
+      link: &#x27;/gastronomia&#x27;
+    },
+    {
+      icon: &#x27;ph:tree-thin&#x27;,
+      label: &#x27;NATURALEZA&#x27;,
+      link: &#x27;/naturaleza&#x27;
+    },
+    {
+      icon: &#x27;ph:balloon-thin&#x27;,
+      label: &#x27;EVENTOS&#x27;,
+      link: &#x27;/eventos&#x27;
+    },
+    {
+      icon: &#x27;material-symbols-light:linked-services-outline&#x27;,
+      label: &#x27;SERVICIOS&#x27;,
+      link: &#x27;/servicios&#x27;
+    }
+  ];
+
+  ngAfterViewInit(): void {
+    if (this.menuContainer?.nativeElement) {
+      this.menuContainer.nativeElement.scrollLeft &#x3D; 0;
+    }
+  }
+
+  onTouchStart(e: TouchEvent): void {
+    if (!this.menuContainer?.nativeElement) return;
+    
+    this.startX &#x3D; e.touches[0].pageX - this.menuContainer.nativeElement.offsetLeft;
+    this.scrollLeft &#x3D; this.menuContainer.nativeElement.scrollLeft;
+  }
+
+  onTouchMove(e: TouchEvent): void {
+    if (!this.startX || !this.menuContainer?.nativeElement) return;
+    
+    const x &#x3D; e.touches[0].pageX - this.menuContainer.nativeElement.offsetLeft;
+    const walk &#x3D; (this.startX - x) * 2;
+    this.menuContainer.nativeElement.scrollLeft &#x3D; this.scrollLeft + walk;
+    e.preventDefault();
+  }
+
+  onTouchEnd(): void {
+    if (!this.menuContainer?.nativeElement) return;
+
+    this.startX &#x3D; 0;
+    const container &#x3D; this.menuContainer.nativeElement;
+    const itemWidth &#x3D; container.offsetWidth / 4.5;
+    const scrollPosition &#x3D; container.scrollLeft;
+    const targetIndex &#x3D; Math.round(scrollPosition / itemWidth);
+    
+    container.scrollTo({
+      left: targetIndex * itemWidth,
+      behavior: &#x27;smooth&#x27;
+    });
+  }
+
+  onMouseDown(e: MouseEvent): void {
+    if (!this.menuContainer?.nativeElement) return;
+    
+    this.isMouseDown &#x3D; true;
+    this.mouseStartX &#x3D; e.pageX - this.menuContainer.nativeElement.offsetLeft;
+    this.mouseScrollLeft &#x3D; this.menuContainer.nativeElement.scrollLeft;
+  }
+
+  onMouseMove(e: MouseEvent): void {
+    if (!this.isMouseDown || !this.menuContainer?.nativeElement) return;
+    
+    e.preventDefault();
+    const x &#x3D; e.pageX - this.menuContainer.nativeElement.offsetLeft;
+    const walk &#x3D; (this.mouseStartX - x) * 2;
+    this.menuContainer.nativeElement.scrollLeft &#x3D; this.mouseScrollLeft + walk;
+  }
+
+  onMouseUp(): void {
+    if (!this.menuContainer?.nativeElement) return;
+    
+    this.isMouseDown &#x3D; false;
+    const container &#x3D; this.menuContainer.nativeElement;
+    const itemWidth &#x3D; container.offsetWidth / 4.5;
+    const scrollPosition &#x3D; container.scrollLeft;
+    const targetIndex &#x3D; Math.round(scrollPosition / itemWidth);
+    
+    container.scrollTo({
+      left: targetIndex * itemWidth,
+      behavior: &#x27;smooth&#x27;
+    });
+  }
+
+  navigateTo(link: string): void {
+    window.location.href &#x3D; link; // Redirige a la ruta especificada
+  }
+}</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="styleData">
+            <pre class="line-numbers"><code class="language-scss">
+  .menu-carousel {
+    padding-top: 50px;
+    text-align: left;
+    margin-left: 50px;
+    
+  }
+  .menu-header {
+      h2 {
+        font-family: &#x27;Raleway&#x27;, sans-serif;
+        font-size: 30px;
+        color: var(--primary-dark);
+        margin: 0;
+        font-weight: 800;       
+
+      }
+
+      p {
+        font-family: &#x27;Source Sans Pro&#x27;, sans-serif;
+        font-size: 14px;
+        color: #6e6e6e;
+        margin: 5px 0 20px;
+      }
+    }
+    .menu-carousel-container {
+      width: 100%;
+      overflow: hidden;
+      padding: 20px 0;
+    }
+
+    .menu-items {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
+      width: 100%;
+      min-width: calc(80px * 5);
+      padding: 0 10px; /* Añadido padding general*/
+    }
+
+    .menu-items::-webkit-scrollbar {
+      display: none;
+    }
+
+    .menu-item {
+      flex: 0 0 auto;
+      width: calc(100% / 4.5);
+      min-width: 100px;
+      scroll-snap-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 5px;
+    }
+
+    .icon-circle {
+      width: 100px;
+      height: 100px;
+      background-color: #f8f9fa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    
+      &amp;:hover {
+        box-shadow: 3px 3px 4px rgba(255, 255, 255, 0.8), 
+                     inset 4px 4px 10px rgba(76, 56, 133, 0.5);
+                     background: rgba(224, 216, 233, 0.3); 
+      }
+    }
+
+    .menu-label {
+      font-size: 12px;
+      text-align: center;
+      color: #4c3885;
+      white-space: nowrap;
+    }
+
+    .iconify {
+      font-size: 40px;
+      color: #4c3885;
+     
+    }
+
+    iconify-icon {
+      width: 60px !important;  /* Añadido !important para asegurar que se aplica*/
+      height: 60px !important; /* Añadido !important para asegurar que se aplica*/
+      color: #4c3885;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 60px !important; /* Añadido para asegurar el tamaño del icono*/
+    }
+
+    .tabler--tower {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    --svg: url(&quot;data:image/svg+xml,%3Csvg xmlns&#x3D;&#x27;http://www.w3.org/2000/svg&#x27; viewBox&#x3D;&#x27;0 0 24 24&#x27;%3E%3Cg fill&#x3D;&#x27;none&#x27; stroke&#x3D;&#x27;%23000&#x27; stroke-linecap&#x3D;&#x27;round&#x27; stroke-linejoin&#x3D;&#x27;round&#x27; stroke-width&#x3D;&#x27;0.5&#x27;%3E%3Cpath d&#x3D;&#x27;M5 3h1a1 1 0 0 1 1 1v2h3V4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2h3V4a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v4.394a2 2 0 0 1-.336 1.11l-1.328 1.992a2 2 0 0 0-.336 1.11V20a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-7.394a2 2 0 0 0-.336-1.11L4.336 9.504A2 2 0 0 1 4 8.394V4a1 1 0 0 1 1-1&#x27;/%3E%3Cpath d&#x3D;&#x27;M10 21v-5a2 2 0 1 1 4 0v5&#x27;/%3E%3C/g%3E%3C/svg%3E&quot;);
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}
+/* Media queries */
+@media (max-width: 768px) {
+      .menu-items {
+        min-width: calc(60px * 3);
+        padding: 0 5px;
+      }
+
+      .menu-item {
+        width: calc(100% / 3); /* Mostrar 3 elementos por vista*/
+        min-width: 80px;
+        padding: 0 3px;
+      }
+
+      .icon-circle {
+        width: 90px;  /* Círculos más pequeños*/
+        height: 90px;
+        margin-bottom: 4px;
+      }
+
+      iconify-icon {
+        width: 40px !important;  /* Iconos más pequeños*/
+        height: 40px !important;
+        font-size: 40px !important;
+      }
+
+      .menu-label {
+        font-size: 12px;  /* Texto más pequeño*/
+      }
+    }
+
+    /* Media query muy pequeños*/
+    @media (max-width: 320px) {
+      .menu-items {
+        min-width: calc(50px * 2.5);
+      }
+
+      .menu-item {
+        width: calc(100% / 2.5); /* Mostrar 2.5 elementos por vista*/
+        min-width: 70px;
+      }
+
+      .icon-circle {
+        width: 60px;
+        height: 60px;
+      }
+
+      iconify-icon {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 35px !important;
+      }
+
+      .menu-label {
+        font-size: 9px;
+      }
+    }
+  
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="menu-carousel">              <div class="menu-header">                <h2>Descurbe</h2>                <p>Lo que tiene para ofrecer</p>              </div>  <div class="menu-carousel-container">    <div class="menu-items" #menuContainer         (touchstart)="onTouchStart($event)"         (touchmove)="onTouchMove($event)"         (touchend)="onTouchEnd()"         (mousedown)="onMouseDown($event)"         (mousemove)="onMouseMove($event)"         (mouseup)="onMouseUp()"         (mouseleave)="onMouseUp()">      <div *ngFor="let item of menuItems" class="menu-item" (click)="navigateTo(item.link)">        <div class="icon-circle">          <iconify-icon [icon]="item.icon"></iconify-icon>        </div>        <span class="menu-label">{{item.label}}</span>      </div>    </div>  </div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ArandaComponent', 'selector': 'app-aranda'},{'name': 'AratisComponent', 'selector': 'app-aratis'},{'name': 'ArComponent', 'selector': 'app-ar'},{'name': 'BottomNavigationComponent', 'selector': 'app-bottom-navigation'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComponentsComponent', 'selector': 'app-components'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'EventsCarouselComponent', 'selector': 'app-events-carousel'},{'name': 'HistoriasComponent', 'selector': 'app-historias'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MenuCarouselComponent', 'selector': 'app-menu-carousel'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NavigationFooterComponent', 'selector': 'app-navigation-footer'},{'name': 'OsejaComponent', 'selector': 'app-oseja'},{'name': 'PlacesCarouselComponent', 'selector': 'app-places-carousel'},{'name': 'PoiMapComponent', 'selector': 'app-poi-map'},{'name': 'ProfileHeaderComponent', 'selector': 'app-profile-header'},{'name': 'ProfileSectionsComponent', 'selector': 'app-profile-sections'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RegisterSuccesComponent', 'selector': 'app-register-succes'},{'name': 'RutasCarouselComponent', 'selector': 'app-rutas-carousel'},{'name': 'SharedComponent', 'selector': 'app-shared'},{'name': 'StartComponent', 'selector': 'app-start'},{'name': 'TiergaComponent', 'selector': 'app-tierga'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'MenuCarouselComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'MenuCarouselComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

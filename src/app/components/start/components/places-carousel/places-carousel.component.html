@@ -1,0 +1,38 @@
+<section id="LugaresDeInteres">
+<div class="places-carousel">
+                <div class="places-header">
+                <h2>Lugares de Interés</h2>
+                <p>Conoce los pueblos de la Comarca</p>
+  </div>
+</div>
+<div id="placesCarousel" class="carousel slide">
+                <!-- Slides -->
+                <div class="carousel-inner">
+                  <div *ngFor="let item of placesItems; let i = index" 
+                       class="carousel-item" 
+                       [class.active]="i === currentSlide">
+                    <img [src]="item.imageUrl" 
+                         [alt]="item.label"
+                         class="d-block w-100">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>{{item.label}}</h5>
+                      <p>{{item.description}}</p>
+                    </div>
+                  </div>
+                </div>
+              
+                <!-- Controles -->
+                <button class="carousel-control-prev" 
+                        type="button" 
+                        (click)="prevSlide()">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" 
+                        type="button" 
+                        (click)="nextSlide()">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Siguiente</span>
+                </button>
+              </div>
+            </section>

@@ -1,1 +1,80 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+                margin-top: 80px; /* Altura del navbar */
+              }
+
+              :root {
+                /* Colores principales */
+                --primary-color: #F80921;      /* Rojo - color principal del logo */
+                --secondary-color: #ffc100;    /* Amarillo - color secundario del logo */
+                
+                /* Variaciones de los colores principales */
+                --primary-light: #ff8a91;      /* Rojo claro */
+                --primary-dark: #930010;       /* Rojo oscuro */
+                --secondary-light: #ffe380;    /* Amarillo claro */
+                --secondary-dark: #b38600;     /* Amarillo oscuro */
+                
+                /* Colores complementarios */
+                --complementary-color: #1E88E5; /* Azul complementario del amarillo */
+                --accent-color: #4CAF50;        /* Verde como color de acento */
+                
+                /* Colores neutros */
+                --neutral-dark: #333333;        /* Gris oscuro para textos */
+                --neutral-medium: #B0B0B0;      /* Gris medio para elementos secundarios */
+                --neutral-light: #FAFAFA;       /* Gris claro para fondos */
+                
+                /* Colores de estado */
+                --success-color: #4CAF50;       /* Verde para éxito */
+                --warning-color: #FFC107;       /* Amarillo para advertencias */
+                --error-color: #F44336;         /* Rojo para errores */
+                
+                /* Colores de texto */
+                --text-dark: #212121;           /* Texto principal */
+                --text-light: #FFFFFF;          /* Texto sobre fondos oscuros */
+                --text-muted: #757575;          /* Texto secundario */
+              }
+              
+
+              :root.dark-theme {
+                /* Colores principales */
+                --primary-color: #F80921;      /* Rojo - color principal del logo */
+                --secondary-color: #ffc100;    /* Amarillo - color secundario del logo */
+                
+                /* Variaciones de los colores principales */
+                --primary-light: #4c2c2e;      /* Rojo claro */
+                --primary-dark: #930010;       /* Rojo oscuro */
+                --secondary-light: #ffe380;    /* Amarillo claro */
+                --secondary-dark: #b38600;     /* Amarillo oscuro */
+                
+                /* Colores complementarios */
+                --complementary-color: #5798ce; /* Azul complementario del amarillo */
+                --accent-color: #66BB6A;        /* Verde como color de acento */
+                
+                /* Colores neutros */
+                --neutral-dark: #121212;        /* Fondo principal oscuro */
+                --neutral-medium: #1E1E1E;      /* Fondo secundario oscuro */
+                --neutral-light: #424242;       /* Elementos destacados o bordes */
+                
+                /* Colores de estado */
+                --success-color: #81C784;       /* Verde para éxito */
+                --warning-color: #FFD54F;       /* Amarillo para advertencias */
+                --error-color: #E57373;         /* Rojo para errores */
+                
+                /* Colores de texto */
+                --text-dark: #FAFAFA;           /* Texto principal en fondos oscuros */
+                --text-light: #FFFFFF;          /* Texto destacado */
+                --text-muted: #BDBDBD;          /* Texto secundario o deshabilitado */
+              }
+             
+              @font-face {
+                font-family: 'Corinthian';
+                src: url('/assets/fonts/Corinthian.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+              }
+              
+              #map {
+                height: 500px;
+                width: 100%;
+              }
+              

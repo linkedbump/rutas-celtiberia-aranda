@@ -1,0 +1,46 @@
+<div class="map-container">
+    <!-- Contenedor para el mapa -->
+    <div id="map"></div>
+  
+    <!-- Panel de control para las rutas -->
+    <div class="routes-control">
+      <h3>Explora las Rutas</h3>
+      <ul>
+        <li>
+          <button (click)="loadRoute('valleAranda')" class="btn btn-primary">Ruta: Valle del Aranda</button>
+        </li>
+        <li>
+          <button (click)="loadRoute('aratis')" class="btn btn-success">Ruta: Aratis</button>
+        </li>
+        <li>
+            <button (click)="loadRoute('aratis')" class="btn btn-success">Ruta: Oseja</button>
+          </li>
+        <li>
+          <button (click)="loadRoute('bosqueSagrado')" class="btn btn-warning">Ruta: Bosque Sagrado</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Ruta: "El valle de Aranda; Tras las huellas de los Celtíberos". </h1>
+                <h3>Descripción:</h3>
+                <p>Una ruta que comienza en Gotor, pasando por el yacimiento del Calvario y terminando en el Centro de Interpretación de Aranda de Moncayo. Ideal para quienes buscan conectar con la historia de los celtíberos y disfrutar de un entorno natural.</p>
+                <h5>Inicio: Gotor</h5>
+                <p><span class="iconify" data-icon="mdi-light:map-marker" style="font-size: 1.2em;"></span> Convento Dominico de la Consolación</p>
+                <p><span class="iconify" data-icon="mdi:information" style="font-size: 1.2em;"></span> Yacimiento del Calvario (a 1 km de Gotor, pequeño poblado celtíbero)</p>
+                <p><span class="iconify" data-icon="mdi:eye" style="font-size: 1.2em;"></span> Mirador de Aranda de Moncayo (vista del embalse de Maidevera y el cerro de Aratis)</p>
+            </div>
+            <div class="col-md-6">
+                <h5>Información de la Ruta</h5>
+                <p><span class="iconify" data-icon="mdi:road" style="font-size: 1.2em;"></span> Longitud: 7 km</p>
+                <p><span class="iconify" data-icon="mdi:clock" style="font-size: 1.2em;"></span> Duración: 2.5 horas</p>
+                <p><span class="iconify" data-icon="mdi:check-circle" style="font-size: 1.2em;"></span> Dificultad: Fácil (apto para familias)</p>
+                <p><span class="iconify" data-icon="mdi:foot-print" style="font-size: 1.2em;"></span> Terreno: Senderos rurales y caminos asfaltados</p>
+                <p><span class="iconify" data-icon="mdi:water" style="font-size: 1.2em;"></span> Recomendaciones: Llevar agua y calzado cómodo</p>
+            </div>
+        </div>
+    </div>
+

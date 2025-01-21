@@ -1,0 +1,87 @@
+
+<div class="register-container">
+                <h1 class="title">Crea tu <span class="highlight">Cuenta</span></h1>
+                
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+                  <div class="form-group">
+                    <label for="name" class="form-label">Nombre</label>
+                    <input 
+                      id="name"
+                      type="text" 
+                      formControlName="name" 
+                      class="form-control" 
+                      placeholder="Ingresa tu nombre"
+                      [class.is-invalid]="nameControl?.invalid && nameControl?.touched"
+                      aria-describedby="name-error" />
+                    <div 
+                      id="name-error" 
+                      class="error" 
+                      *ngIf="nameControl?.invalid && nameControl?.touched">
+                      <span *ngIf="nameControl?.errors?.['required']">Nombre es requerido.</span>
+                      <span *ngIf="nameControl?.errors?.['minlength']">El nombre debe tener al menos 2 caracteres.</span>
+                      <span *ngIf="nameControl?.errors?.['pattern']">El nombre solo puede contener letras.</span>
+                    </div>
+                  </div>
+              
+                  <div class="form-group">
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input 
+                      id="email" 
+                      type="email" 
+                      formControlName="email" 
+                      class="form-control" 
+                      placeholder="Ingresa tu correo"
+                      [class.is-invalid]="emailControl?.invalid && emailControl?.touched"
+                      aria-describedby="email-error" />
+                    <div 
+                      id="email-error" 
+                      class="error" 
+                      *ngIf="emailControl?.invalid && emailControl?.touched">
+                      <span *ngIf="emailControl?.errors?.['required']">Correo electrónico es requerido.</span>
+                      <span *ngIf="emailControl?.errors?.['email'] || emailControl?.errors?.['pattern']">
+                        Ingresa un correo electrónico válido.
+                      </span>
+                    </div>
+                  </div>
+              
+                  <div class="form-group">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input id="password" type="password" formControlName="password" class="form-control" placeholder="Ingresa tu contraseña" />
+                    <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error">
+                      Contraseña es requerida.
+                    </div>
+                  </div>
+              
+                  <!-- Mensaje de error -->
+                  <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                  </div>
+
+                  <!-- Mensaje de éxito -->
+                  <div *ngIf="successMessage" class="alert alert-success">
+                    {{ successMessage }}
+                  </div>
+
+                  <div class="social-buttons">
+                    <!-- Registro con Google-->
+                      <button class="btn-social google" (click)=" signInWithGoogle()">
+                        <i class="fab fa-google"></i> Registrarse con Google
+                      </button>
+                      
+                    <!-- Registro con Facebook -->
+                    <button class="btn-social facebook" (click)="signInWithFacebook()">
+                      <i class="fab fa-facebook"></i> Registrarse con Facebook
+                    </button>
+
+                    <!-- Registro con Apple -->
+                    <button class="btn-social apple" (click)="signInWithApple()">
+                      <i class="fab fa-apple"></i> Registrarse con Apple
+                    </button>
+                  </div>
+                </form>
+                
+                <p class="link-login">
+                  ¿Ya tienes cuenta? <a [routerLink]="['/login']" class="link">Inicia sesión</a>
+                </p>
+              </div>
+              

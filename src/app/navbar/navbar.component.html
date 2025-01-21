@@ -1,0 +1,17 @@
+
+<nav class="navbar shadow-sm fixed-top">
+  <div class="container-fluid">
+    <!-- Logo a la izquierda -->
+    <a class="navbar-brand" routerLink="/home">
+      <img src="/assets/images/Logo.png" alt="Logo" height="50">
+    </a>
+
+    <!-- Espaciador -->
+    <div class="flex-grow-1"></div>
+
+    <!-- Icono de usuario a la derecha -->
+    <div class="user-icon-container" (click)="navigateToDashboard()">
+      <span class="iconify" data-icon="ph:user-thin" style="font-size: 35px;"></span>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,80 @@
+.footer {
+                padding: 0.25rem 0.5rem;
+                z-index: 1000;
+              }
+              
+              .nav-container {
+                max-width: 1280px;
+                margin: 0 auto;
+              }
+              
+              .nav-list {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 0.5rem;
+                margin: 0;
+                list-style: none;
+              }
+              
+              .nav-button {
+                position: relative;
+                width: 4rem;
+                height: 4rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                background: none;
+                border: none;
+                padding: 0;
+                color: #666;
+                transition: color 0.2s;
+              }
+              
+              .button-circle {
+                position: absolute;
+                width: 3rem;
+                height: 3rem;
+                background-color: rgba(34, 197, 94, 0.1);
+                border-radius: 50%;
+                
+                transform: scale(0);
+                transition: transform 0.2s;
+              }
+              
+              .nav-button:hover .button-circle,
+              .nav-button.active .button-circle {
+                transform: scale(1);
+              }
+              
+              .nav-button i {
+                font-size: 1.5rem;
+                margin-bottom: 0.25rem;
+                position: relative;
+                z-index: 1;
+              }
+              
+              .nav-button span {
+                font-size: 0.625rem;
+                font-weight: 500;
+                position: relative;
+                z-index: 1;
+              }
+              
+              .nav-button:hover,
+              .nav-button.active {
+                color: rgb(21, 128, 61);
+              }
+              
+              @media (min-width: 768px) {
+                .nav-list {
+                  padding: 0 2rem;
+                }
+              }
+              
+              @media (min-width: 1024px) {
+                .nav-list {
+                  padding: 0 4rem;
+                }
+              }

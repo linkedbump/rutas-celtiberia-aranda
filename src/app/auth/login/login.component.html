@@ -1,0 +1,65 @@
+<app-navbar></app-navbar>
+
+<div class="login-container">
+                <h2>Inicia sesión en tu cuenta y sigue disfrutando de todo lo que la Celtiberia tiene preparado para ti</h2>
+              
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                  <!-- Campo de Email -->
+                  <div class="input-group">
+                    <input 
+                      type="email" 
+                      formControlName="email"
+                      placeholder="Email"
+                      required>
+                  </div>
+              
+                  <!-- Campo de Contraseña -->
+                  <div class="input-group">
+                    <input 
+                      type="password" 
+                      formControlName="password"
+                      placeholder="Contraseña"
+                      required>
+                  </div>
+              
+                  <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                  </div>
+              
+                  <a href="#" class="forgot-password">¿Olvidaste la contraseña?</a>
+              
+                  <!-- Botón de inicio de sesión -->
+                  <button type="submit" class="btn-login" [disabled]="!loginForm.valid || loading">
+                    {{ loading ? 'Cargando...' : 'Iniciar sesión' }}
+                  </button>
+                </form>
+              
+                <!-- Registro -->
+                <p>¿Aún no tienes cuenta en AR-Anda? <a [routerLink]="['/register']" class="register-link">Regístrate aquí ahora</a></p>
+              
+                <!-- Separador -->
+                <div class="separator">O continúa con</div>
+              
+                <!-- Botones de redes sociales -->
+                <div class="social-login">
+                  <button class="btn-social facebook">
+                    <i class="fab fa-facebook-f"></i> Inicia sesión con Facebook
+                    </button>
+                  <button class="btn-social google" (click)=" loginWithGoogle()">
+                    <i class="fab fa-google"></i> Inicia sesión con Google
+                  </button>
+                  <button class="btn-social apple">
+                    <i class="fab fa-apple"></i> Inicia sesión con Apple
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Navegación inferior -->
+              <nav class="bottom-nav">
+                <a routerLink="/home"><i class="fas fa-home"></i> Home</a>
+                <a routerLink="/map"><i class="fas fa-map-marker-alt"></i> Mapa</a>
+                <a routerLink="/ar"><i class="fas fa-cube"></i> AR</a>
+                <a routerLink="/stories"><i class="fas fa-book"></i> Historias</a>
+                <a routerLink="/menu"><i class="fas fa-bars"></i> Menú</a>
+              </nav>
+              

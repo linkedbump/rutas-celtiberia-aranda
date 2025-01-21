@@ -1,0 +1,491 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ar-anda-lite documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">ar-anda-lite documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  StartComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/start/start.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-start</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>RouterModule</code>
+                                <code><a href="../components/EventsCarouselComponent.html" target="_self" >EventsCarouselComponent</a></code>
+                                <code><a href="../components/PlacesCarouselComponent.html" target="_self" >PlacesCarouselComponent</a></code>
+                                <code><a href="../components/MenuCarouselComponent.html" target="_self" >MenuCarouselComponent</a></code>
+                                <code><a href="../components/RutasCarouselComponent.html" target="_self" >RutasCarouselComponent</a></code>
+                                <code><a href="../components/NavigationFooterComponent.html" target="_self" >NavigationFooterComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./start.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./start.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { RouterModule } from &#x27;@angular/router&#x27;;
+import { EventsCarouselComponent } from &quot;./components/events-carousel/events-carousel.component&quot;;
+import { PlacesCarouselComponent } from &quot;./components/places-carousel/places-carousel.component&quot;;
+import { MenuCarouselComponent } from &#x27;./components/menu-carousel/menu-carousel.component&#x27;;
+import { RutasCarouselComponent } from &#x27;./components/rutas-carousel/rutas-carousel.component&#x27;;
+import { NavigationFooterComponent } from &#x27;src/app/shared/navigation-footer/navigation-footer.component&#x27;;
+
+@Component({
+  selector: &#x27;app-start&#x27;,
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    EventsCarouselComponent,
+    PlacesCarouselComponent,
+    MenuCarouselComponent,
+    RutasCarouselComponent,
+    NavigationFooterComponent
+   
+  
+  ],
+  templateUrl: &#x27;./start.component.html&#x27;,
+  styleUrls: [&#x27;./start.component.css&#x27;]
+})
+export class StartComponent {
+
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container-fluid start-page p-0&quot;&gt;
+                &lt;!-- Encabezado --&gt;
+                &lt;header class&#x3D;&quot;header px-3 py-3 d-flex justify-content-between align-items-center&quot;&gt;
+                  &lt;i class&#x3D;&quot;bi bi-search&quot;&gt;&lt;/i&gt;
+                  &lt;h1 class&#x3D;&quot;text-center flex-grow-1&quot;&gt;Explora&lt;/h1&gt;
+                  &lt;div class&#x3D;&quot;icon-circle&quot;&gt;
+                    &lt;a routerLink&#x3D;&quot;/dashboard&quot;&gt;
+                    &lt;svg xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; width&#x3D;&quot;30&quot; height&#x3D;&quot;30&quot; viewBox&#x3D;&quot;0 0 20 20&quot;&gt;&lt;path fill&#x3D;&quot;#4a0c85&quot; d&#x3D;&quot;M9.993 10.573a4.5 4.5 0 1 0 0-9a4.5 4.5 0 0 0 0 9M10 0a6 6 0 0 1 3.04 11.174c3.688 1.11 6.458 4.218 6.955 8.078c.047.367-.226.7-.61.745c-.383.045-.733-.215-.78-.582c-.54-4.19-4.169-7.345-8.57-7.345c-4.425 0-8.101 3.161-8.64 7.345c-.047.367-.397.627-.78.582c-.384-.045-.657-.378-.61-.745c.496-3.844 3.281-6.948 6.975-8.068A6 6 0 0 1 10 0&quot;/&gt;&lt;/svg&gt;
+                    &lt;/a&gt;
+                  &lt;/div&gt;
+                &lt;/header&gt;
+              
+                &lt;!-- Subtítulo --&gt;
+                &lt;div class&#x3D;&quot;subheader px-3&quot;&gt;
+                  &lt;h2 class&#x3D;&quot;text-center flex-grow-1&quot;&gt;La Comarca del Aranda&lt;/h2&gt;
+                &lt;/div&gt;
+
+                &lt;!-------    Menu-carousel    --&gt;
+                &lt;app-menu-carousel&gt;&lt;/app-menu-carousel&gt;              
+                &lt;!-- Carrusel: Lugares --&gt;
+                &lt;app-places-carousel&gt;&lt;/app-places-carousel&gt;
+                &lt;!-- Carrusel: Las mejores rutas --&gt;
+                &lt;app-rutas-carousel&gt;&lt;/app-rutas-carousel&gt;
+              
+                &lt;!-- Carrusel: Próximos eventos --&gt;
+                &lt;app-events-carousel&gt;&lt;/app-events-carousel&gt;
+                
+                &lt;!-- Componente de pie de página --&gt;
+                &lt;app-navigation-footer&gt;&lt;/app-navigation-footer&gt;              
+              
+              
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./start.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.start-page {
+                background-color: #f9f9f9;
+              
+                .header {
+                  background-color: var(--neutral-dark);
+                  border-bottom: 1px solid var(--neutral-light);
+              
+                  h1{
+                    font-family: &#x27;Raleway&#x27;, sans-serif;
+                    font-size: 30px;
+                    color: var(--secondary-light);
+                    margin: 0;
+                    font-weight: 800;
+                  }
+              
+                  i {
+                    font-size: 1.5rem;
+                    color: #6c757d;
+                  }
+                }
+              
+                .subheader {
+                  background: linear-gradient(135deg, var(--primary-color), #ffffff);
+                  padding: 0.5rem 1rem;
+                  align-content: center;
+
+                  h2 {
+                    font-family: &#x27;Raleway&#x27;, sans-serif;
+                    font-size: 20px;
+                    color: var(--neutral-light);
+                    margin: 0;
+                    font-weight: 500;
+
+                  }
+
+                  p {
+                    color: #6c757d;
+                  }
+                }
+              
+                .carousel-section {
+                  .section-title {
+                    font-size: 1.25rem;
+                    color: #2d572c;
+                    border-radius: 15%;
+                  }
+              
+                  .section-subtitle {
+                    color: #6c757d;
+                  }
+              
+                  .carousel-item img {
+                    max-width: 150px;
+                    border-radius: 10%;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                  }
+                }
+              
+                .footer {
+                  border-top: 1px solid #eaeaea;
+              
+                  button {
+                    font-size: 0.875rem;
+              
+                    i {
+                      font-size: 1.5rem;
+                      color:var(--neutral-dark);
+                    }
+                  }
+                }
+              }
+              .icon-circle {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 40px;
+                color: var(--primary-color);
+                width: 50px; /* Ajusta el tamaño  */
+                height: 50px; /* Ajusta el tamaño   */
+                border-radius: 50%;
+                background-color: #f8f9fa; /* Color de fondo del círculo */
+                margin-bottom: 8px;
+                box-shadow: 0px 4px 8px #00000033;
+
+                &amp;:hover {
+                  box-shadow: 3px 3px 4px rgba(255, 255, 255, 0.8), 
+                               inset 4px 4px 10px rgba(76, 56, 133, 0.5);
+                               background: rgba(224, 216, 233, 0.3); 
+                }
+
+            }
+            
+            
+
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container-fluid start-page p-0">                <!-- Encabezado -->                <header class="header px-3 py-3 d-flex justify-content-between align-items-center">                  <i class="bi bi-search"></i>                  <h1 class="text-center flex-grow-1">Explora</h1>                  <div class="icon-circle">                    <a routerLink="/dashboard">                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 20 20"><path fill="#4a0c85" d="M9.993 10.573a4.5 4.5 0 1 0 0-9a4.5 4.5 0 0 0 0 9M10 0a6 6 0 0 1 3.04 11.174c3.688 1.11 6.458 4.218 6.955 8.078c.047.367-.226.7-.61.745c-.383.045-.733-.215-.78-.582c-.54-4.19-4.169-7.345-8.57-7.345c-4.425 0-8.101 3.161-8.64 7.345c-.047.367-.397.627-.78.582c-.384-.045-.657-.378-.61-.745c.496-3.844 3.281-6.948 6.975-8.068A6 6 0 0 1 10 0"/></svg>                    </a>                  </div>                </header>                              <!-- Subtítulo -->                <div class="subheader px-3">                  <h2 class="text-center flex-grow-1">La Comarca del Aranda</h2>                </div>                <!-------    Menu-carousel    -->                <app-menu-carousel></app-menu-carousel>                              <!-- Carrusel: Lugares -->                <app-places-carousel></app-places-carousel>                <!-- Carrusel: Las mejores rutas -->                <app-rutas-carousel></app-rutas-carousel>                              <!-- Carrusel: Próximos eventos -->                <app-events-carousel></app-events-carousel>                                <!-- Componente de pie de página -->                <app-navigation-footer></app-navigation-footer>                                          </div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ArandaComponent', 'selector': 'app-aranda'},{'name': 'AratisComponent', 'selector': 'app-aratis'},{'name': 'ArComponent', 'selector': 'app-ar'},{'name': 'BottomNavigationComponent', 'selector': 'app-bottom-navigation'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComponentsComponent', 'selector': 'app-components'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'EventsCarouselComponent', 'selector': 'app-events-carousel'},{'name': 'HistoriasComponent', 'selector': 'app-historias'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'MenuCarouselComponent', 'selector': 'app-menu-carousel'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NavigationFooterComponent', 'selector': 'app-navigation-footer'},{'name': 'OsejaComponent', 'selector': 'app-oseja'},{'name': 'PlacesCarouselComponent', 'selector': 'app-places-carousel'},{'name': 'PoiMapComponent', 'selector': 'app-poi-map'},{'name': 'ProfileHeaderComponent', 'selector': 'app-profile-header'},{'name': 'ProfileSectionsComponent', 'selector': 'app-profile-sections'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RegisterSuccesComponent', 'selector': 'app-register-succes'},{'name': 'RutasCarouselComponent', 'selector': 'app-rutas-carousel'},{'name': 'SharedComponent', 'selector': 'app-shared'},{'name': 'StartComponent', 'selector': 'app-start'},{'name': 'TiergaComponent', 'selector': 'app-tierga'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'StartComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StartComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

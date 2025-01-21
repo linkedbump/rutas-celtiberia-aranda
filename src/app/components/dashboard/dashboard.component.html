@@ -1,0 +1,79 @@
+<div class="container mt-5">
+                <div class="row">
+                  <div class="col-md-12 text-center mb-4">
+                    <h1 class="display-5">Bienvenido al Dashboard de AR-anda</h1>
+                    <p class="text-muted">Mantente al tanto de las actualizaciones y rutas destacadas.</p>
+                  </div>
+                </div>
+              
+                <div class="row">
+                  <!-- Notificaciones -->
+                  <div class="col-md-6 mb-4">
+                    <div class="card shadow">
+                      <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Notificaciones</h5>
+                      </div>
+                      <div class="card-body">
+                        <ul class="list-group">
+                          <li *ngFor="let notificacion of notificaciones" class="list-group-item">
+                            {{ notificacion }}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+              
+                  <!-- Nuevas Rutas -->
+                  <div class="col-md-6 mb-4">
+                    <div class="card shadow">
+                      <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Nuevas Rutas</h5>
+                      </div>
+                      <div class="card-body">
+                        <ul class="list-group">
+                          <li *ngFor="let ruta of nuevasRutas" class="list-group-item">
+                            {{ ruta }}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="row">
+                  <!-- Puntos Destacados -->
+                  <div class="col-md-12">
+                    <div class="card shadow">
+                      <div class="card-header bg-warning text-dark">
+                        <h5 class="mb-0">Puntos Destacados</h5>
+                      </div>
+                      <div class="card-body">
+                        <div *ngFor="let punto of puntosDestacados" class="card mb-3">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ punto.nombre }}</h5>
+                            <p class="card-text">{{ punto.descripcion }}</p>
+                            <a [href]="'/detalle/' + punto.id" class="btn btn-primary">Ver más</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="dashboard flex flex-col h-screen bg-gray-100">
+                <!-- Encabezado -->
+                <div class="profile-header">
+                                <app-profile-header></app-profile-header>
+                </div>
+              
+                <!-- Contenido principal (secciones del dashboard) -->
+                <div class="flex-grow overflow-y-auto">
+                  <div class="profile-sections">
+                                <app-profile-sections></app-profile-sections>
+                  </div>
+                </div>
+              
+                <!-- Navegación inferior -->
+                <app-bottom-navigation/>
+              </div>
