@@ -20,7 +20,7 @@
     "@angular/platform-browser-dynamic": "^18.2.11",
     "@angular/router": "^18.2.11",
     "@iconify/iconify": "^3.1.1",
-    "@types/three": "^0.172.0",
+    "@types/three": "^0.158.3",
     "bootstrap": "^5.3.3",
     "firebase": "^10.14.1",
     "iconify-icon": "^2.3.0",

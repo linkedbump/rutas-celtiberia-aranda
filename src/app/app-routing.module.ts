@@ -6,10 +6,10 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StartComponent } from './components/start/start.component';
 import { MapComponent } from './components/rutas/aranda/map/map.component';
-import { ArComponent } from './components/ar/ar.component';
+import { ArViewerComponent } from './components/ar/ar.component';
 import { HistoriasComponent } from './components/historias/historias.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { PoiMapComponent } from './poi-map/poi-map.component';
+import { PoiMapComponent } from './components/poi-map/poi-map.component';
 import { CategoriasComponent } from './components/rutas/categorias/categorias.component';
 
 const routes: Routes = [
@@ -20,12 +20,12 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'start', component: StartComponent},
   { path: 'mapa', component: MapComponent},
-  { path: 'ar', component:ArComponent},
+  { path: 'ar-viewer/:id', component: ArViewerComponent },
   { path: 'historias', component: HistoriasComponent},
   { path: 'menu', component: MenuComponent},
   { path: 'map', component: PoiMapComponent},
-  { path: 'origen', component: CategoriasComponent },
-  { path: 'rutas/:region', component: MapComponent}
+  { path: 'categoria', component: CategoriasComponent },
+  { path: 'mapa/:categoria', component: MapComponent}
 
 ];
 

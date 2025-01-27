@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   puntosDestacados: any[] = [];
 
   constructor(private dashboardService: DashboardService) {}
-
+ 
   ngOnInit(): void {
     this.cargarDatos();
   }
