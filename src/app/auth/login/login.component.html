@@ -1,65 +1,75 @@
-<app-navbar></app-navbar>
-
 <div class="login-container">
-                <h2>Inicia sesión en tu cuenta y sigue disfrutando de todo lo que la Celtiberia tiene preparado para ti</h2>
-              
-                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                  <!-- Campo de Email -->
-                  <div class="input-group">
-                    <input 
-                      type="email" 
-                      formControlName="email"
-                      placeholder="Email"
-                      required>
-                  </div>
-              
-                  <!-- Campo de Contraseña -->
-                  <div class="input-group">
-                    <input 
-                      type="password" 
-                      formControlName="password"
-                      placeholder="Contraseña"
-                      required>
-                  </div>
-              
-                  <div *ngIf="errorMessage" class="alert alert-danger">
-                    {{ errorMessage }}
-                  </div>
-              
-                  <a href="#" class="forgot-password">¿Olvidaste la contraseña?</a>
-              
-                  <!-- Botón de inicio de sesión -->
-                  <button type="submit" class="btn-login" [disabled]="!loginForm.valid || loading">
-                    {{ loading ? 'Cargando...' : 'Iniciar sesión' }}
-                  </button>
-                </form>
-              
-                <!-- Registro -->
-                <p>¿Aún no tienes cuenta en AR-Anda? <a [routerLink]="['/register']" class="register-link">Regístrate aquí ahora</a></p>
-              
-                <!-- Separador -->
-                <div class="separator">O continúa con</div>
-              
-                <!-- Botones de redes sociales -->
-                <div class="social-login">
-                  <button class="btn-social facebook">
-                    <i class="fab fa-facebook-f"></i> Inicia sesión con Facebook
-                    </button>
-                  <button class="btn-social google" (click)=" loginWithGoogle()">
-                    <i class="fab fa-google"></i> Inicia sesión con Google
-                  </button>
-                  <button class="btn-social apple">
-                    <i class="fab fa-apple"></i> Inicia sesión con Apple
-                  </button>
-                </div>
-              </div>
-              
-              <!-- Navegación inferior -->
-              <nav class="bottom-nav">
-                <a routerLink="/home"><i class="fas fa-home"></i> Home</a>
-                <a routerLink="/map"><i class="fas fa-map-marker-alt"></i> Mapa</a>
-                <a routerLink="/ar"><i class="fas fa-cube"></i> AR</a>
-                <a routerLink="/stories"><i class="fas fa-book"></i> Historias</a>
-                <a routerLink="/menu"><i class="fas fa-bars"></i> Menú</a>
-              </nav>
-              
+  <h1 class="title">Inicia <span class="highlight">Sesión</span></h1>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Correo electrónico</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="form-control"
+        placeholder="Tu correo"
+        [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+      />
+      <div class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+        <span *ngIf="loginForm.get('email')?.errors?.['required']">El correo es obligatorio.</span>
+        <span *ngIf="loginForm.get('email')?.errors?.['email']">Formato de correo inválido.</span>
+      </div>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        class="form-control"
+        placeholder="Tu contraseña"
+        [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+      />
+      <div class="error" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        <span *ngIf="loginForm.get('password')?.errors?.['required']">La contraseña es obligatoria.</span>
+        <span *ngIf="loginForm.get('password')?.errors?.['minlength']">Mínimo 6 caracteres.</span>
+      </div>
+    </div>
+
+    <!-- Error -->
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Botón de acceso -->
+    <div class="form-group text-center mt-4">
+      <button
+        type="submit"
+        class="btn btn-primary btn-block"
+        [disabled]="loading || loginForm.invalid">
+        {{ loading ? 'Iniciando sesión...' : 'Iniciar sesión' }}
+      </button>
+    </div>
+
+    <!-- Divider -->
+    <div class="text-center my-3">
+      <small>O</small>
+    </div>
+
+    <!-- Google -->
+    <div class="social-buttons text-center">
+      <button
+        type="button"
+        class="btn-social google"
+        (click)="loginWithGoogle()"
+        [disabled]="loading">
+        <i class="fab fa-google"></i> Iniciar sesión con Google
+      </button>
+    </div>
+  </form>
+
+  <p class="link-register mt-4 text-center">
+    ¿No tienes cuenta?
+    <a [routerLink]="['/register']" class="link">Regístrate aquí</a>
+  </p>
+</div>

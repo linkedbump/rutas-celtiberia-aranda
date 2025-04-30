@@ -1,156 +1,207 @@
+// register.component.ts
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { UserRegistration, RegistrationResponse } from '../models/auth.interfaces';
-import { NavbarComponent } from 'src/app/navbar/navbar.component';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  template: `
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card mt-5">
+            <div class="card-body">
+              <h2 class="text-center mb-4">Registro</h2>
+              
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Nombre</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="name" 
+                    formControlName="name"
+                    [class.is-invalid]="name?.invalid && name?.touched"
+                    placeholder="Tu nombre">
+                  <div class="invalid-feedback" *ngIf="name?.errors?.['required']">
+                    El nombre es requerido
+                  </div>
+                  <div class="invalid-feedback" *ngIf="name?.errors?.['pattern']">
+                    El nombre solo puede contener letras y espacios
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input 
+                    type="email" 
+                    class="form-control" 
+                    id="email" 
+                    formControlName="email"
+                    [class.is-invalid]="email?.invalid && email?.touched"
+                    placeholder="ejemplo@correo.com">
+                  <div class="invalid-feedback" *ngIf="email?.errors?.['required']">
+                    El email es requerido
+                  </div>
+                  <div class="invalid-feedback" *ngIf="email?.errors?.['email']">
+                    Por favor, introduce un email válido
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <input 
+                    type="password" 
+                    class="form-control" 
+                    id="password" 
+                    formControlName="password"
+                    [class.is-invalid]="password?.invalid && password?.touched"
+                    placeholder="••••••••">
+                  <div class="invalid-feedback" *ngIf="password?.errors?.['required']">
+                    La contraseña es requerida
+                  </div>
+                  <div class="invalid-feedback" *ngIf="password?.errors?.['minlength']">
+                    La contraseña debe tener al menos 6 caracteres
+                  </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                  <button 
+                    type="submit" 
+                    class="btn btn-primary"
+                    [disabled]="registerForm.invalid || isLoading">
+                    {{ isLoading ? 'Registrando...' : 'Registrarse' }}
+                  </button>
+                </div>
+              </form>
+
+              <div class="text-center mt-3">
+                <button 
+                  class="btn btn-outline-primary"
+                  (click)="registerWithGoogle()"
+                  [disabled]="isLoading">
+                  <i class="bi bi-google"></i> Registrarse con Google
+                </button>
+              </div>
+
+              <div class="text-center mt-3">
+                <a routerLink="/login">¿Ya tienes cuenta? Inicia sesión</a>
+              </div>
+
+              <div class="alert alert-danger mt-3" *ngIf="errorMessage">
+                {{ errorMessage }}
+              </div>
+
+              <div class="alert alert-success mt-3" *ngIf="successMessage">
+                {{ successMessage }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `,
+  styles: [`
+    .card {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: #ff8a91;
+    }
+    .btn-primary:hover {
+      background-color: #930010;
+      border-color: #ff8a91;
+    }
+    .btn-outline-primary {
+      color: #ff8a91,
+      border-color: #var(--primary-color);
+    }
+    .btn-outline-primary:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+  `]
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  loading = false;
+  isLoading = false;
   errorMessage = '';
   successMessage = '';
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.registerForm = this.fb.group({
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúñÁÉÍÓÚÑ\s]+$/)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      displayName: ['']
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  ngOnInit(): void {
-    this.registerForm = this.fb.group({
-      name: ['', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)
-      ]],
-      email: ['', [
-        Validators.required,
-        Validators.email,
-        Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
-      ]],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(6)
-      ]]
-    });
-  }
+  ngOnInit(): void {}
 
-  get nameControl() { return this.registerForm.get('name'); }
-  get emailControl() { return this.registerForm.get('email'); }
-  get passwordControl() { return this.registerForm.get('password'); }
+  get name() { return this.registerForm.get('name'); }
+  get email() { return this.registerForm.get('email'); }
+  get password() { return this.registerForm.get('password'); }
 
-  onSubmit(): void {
+  onSubmit() {
     if (this.registerForm.valid) {
-      this.loading = true;
+      this.isLoading = true;
       this.errorMessage = '';
       this.successMessage = '';
-      const userData: UserRegistration = {
-        displayName: this.registerForm.get('name')?.value,
-        email: this.registerForm.get('email')?.value,
-        password: this.registerForm.get('password')?.value
-      };
-
-      this.authService.registerUser(userData).subscribe({
-        next: (response: RegistrationResponse) => {
+      
+      this.authService.registerWithEmail(
+        this.registerForm.get('email')?.value,
+        this.registerForm.get('password')?.value,
+        this.registerForm.get('name')?.value
+      ).subscribe({
+        next: (response) => {
           if (response.success) {
-            this.successMessage = '¡Registro exitoso! Redirigiendo al login...';
+            this.successMessage = '¡Registro exitoso! Redirigiendo...';
             setTimeout(() => {
-              this.router.navigate(['/login']);
-            }, 2000);
-          }
-        },
-        error: (error: any) => {
-          this.loading = false;
-          if (error.code === 'auth/email-already-in-use' || 
-              error?.message?.includes('email-already-in-use')) {
-            this.errorMessage = 'Este correo electrónico ya está registrado. Por favor, utiliza otro email.';
+              this.router.navigate(['/map']);
+            }, 1500);
           } else {
-            this.errorMessage = 'Ha ocurrido un error durante el registro. Por favor, inténtalo de nuevo.';
+            this.errorMessage = response.message || 'Error en el registro';
           }
-          console.error('Error durante el registro:', error);
+          this.isLoading = false;
         },
-        complete: () => {
-          this.loading = false;
+        error: (error) => {
+          this.errorMessage = 'Error en el registro. Por favor, intenta de nuevo.';
+          this.isLoading = false;
         }
       });
     }
   }
 
-  async signInWithGoogle(): Promise<void> {
-    this.loading = true;
+  registerWithGoogle() {
+    this.isLoading = true;
     this.errorMessage = '';
     this.successMessage = '';
-
-    try {
-      const response = await this.authService.signInWithGoogle();
-      if (response.success) {
-        this.successMessage = '¡Registro con Google exitoso! Redirigiendo...';
-        setTimeout(() => {
-          this.router.navigate(['/dashboard']); // o la ruta que prefieras
-        }, 2000);
+    
+    this.authService.signInWithGoogle().subscribe({
+      next: (response) => {
+        if (response.success) {
+          this.successMessage = '¡Registro exitoso! Redirigiendo...';
+          setTimeout(() => {
+            this.router.navigate(['/start']);
+          }, 1500);
+        } else {
+          this.errorMessage = response.message || 'Error en el registro con Google';
+        }
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.errorMessage = 'Error en el registro con Google';
+        this.isLoading = false;
       }
-    } catch (error: any) {
-      this.loading = false;
-      this.errorMessage = 'Error al registrarse con Google. Por favor, inténtalo de nuevo.';
-      console.error('Error con Google Sign-in:', error);
-    } finally {
-      this.loading = false;
-    }
-  }
-
-  async signInWithFacebook(): Promise<void> {
-    this.loading = true;
-    this.errorMessage = '';
-    this.successMessage = '';
-
-    try {
-      const response = await this.authService.signInWithFacebook();
-      if (response.success) {
-        this.successMessage = '¡Registro con Facebook exitoso! Redirigiendo...';
-        setTimeout(() => {
-          this.router.navigate(['/dashboard']); // o la ruta que prefieras
-        }, 2000);
-      }
-    } catch (error: any) {
-      this.loading = false;
-      this.errorMessage = 'Error al registrarse con Facebook. Por favor, inténtalo de nuevo.';
-      console.error('Error con Facebook Sign-in:', error);
-    } finally {
-      this.loading = false;
-    }
-  }
-
-  async signInWithApple(): Promise<void> {
-    this.loading = true;
-    this.errorMessage = '';
-    this.successMessage = '';
-
-    try {
-      const response = await this.authService.signInWithApple();
-      if (response.success) {
-        this.successMessage = '¡Registro con Apple exitoso! Redirigiendo...';
-        setTimeout(() => {
-          this.router.navigate(['/dashboard']); // o la ruta que prefieras
-        }, 2000);
-      }
-    } catch (error: any) {
-      this.loading = false;
-      this.errorMessage = 'Error al registrarse con Apple. Por favor, inténtalo de nuevo.';
-      console.error('Error con Apple Sign-in:', error);
-    } finally {
-      this.loading = false;
-    }
+    });
   }
 }

@@ -7,12 +7,14 @@
                 font-size: 30px;
                 color: #2e5c24; 
                 font-weight: 800;
+                text-align: center;
               }
               
               p {
                 color: #666;
                 font-size: 14px;
                 margin-bottom: 24px;
+                text-align: center;
               }
               
               .carousel {

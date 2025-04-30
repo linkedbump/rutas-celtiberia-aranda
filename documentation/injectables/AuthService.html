@@ -840,7 +840,8 @@ export class AuthService {
       createdAt: new Date()
     };
     
-    return this.firestore.collection(&#x27;users&#x27;).add(userData);
+    const userRef: AngularFirestoreDocument<User> = this.firestore.doc(`users/${user.uid}`);
+    return userRef.set(userData, { merge: true });
   }
   //Método para login con email y contraseña
   loginWithEmailPassword(email: string, password: string) {

@@ -3,7 +3,7 @@
                   <ul class="nav-list">
                     <li>
                       <button class="nav-button" 
-                              routerLink="/home" 
+                              routerLink="/start" 
                               routerLinkActive="active"
                               [routerLinkActiveOptions]="{exact: true}">
                         <div class="button-circle"></div>
@@ -13,7 +13,7 @@
                     </li>
                     <li>
                       <button class="nav-button" 
-                              routerLink="/categoria" 
+                              routerLink="/celtiberia" 
                               routerLinkActive="active"
                               [routerLinkActiveOptions]="{exact: true}">
                         <div class="button-circle"></div>
@@ -22,10 +22,13 @@
                       </button>
                     </li>
                     <li>
-                      <button class="nav-button active"
-                              routerLink="/ar"
-                              routerLinkActive="active"
-                              [routerLinkActiveOptions]="{exact: true}">
+                      <button
+                        class="nav-button active"
+                        routerLink="/map"
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}"
+                        title="Realidad aumentada"
+                        aria-label="Realidad aumentada">
                         <div class="button-circle"></div>
                         <i class="bi bi-box"></i>
                         <span>AR</span>
@@ -33,7 +36,7 @@
                     </li>
                     <li>
                       <button class="nav-button active"
-                              routerLink="/historias"
+                              routerLink="/personaje"
                               routerLinkActive="active"
                               [routerLinkActiveOptions]="{exact: true}">
                         <span>HISTORIAS</span>
@@ -41,7 +44,7 @@
                         <i class="bi bi-book"></i>
                       </button>
                     </li>
-                    <li>
+                    <!-- <li>
                       <button class="nav-button active"
                               routerLink="/menu"
                               routerLinkActive="active"
@@ -50,7 +53,7 @@
                         <div class="button-circle"></div>
                         <i class="bi bi-list"></i>
                       </button>
-                    </li>
+                    </li> -->
                   </ul>
                 </nav>
               </footer>

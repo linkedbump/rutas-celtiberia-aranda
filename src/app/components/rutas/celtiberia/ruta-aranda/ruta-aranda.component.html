@@ -1,0 +1,174 @@
+<div class="header">
+                <h1>Ruta de la Celtiberia: valle del Aranda</h1>
+                </div>
+              
+              <div class="map-container">
+                <div id="map" class="map"></div>
+              </div>
+              
+              <div class="cards-wrapper">
+                <h3>Puntos de Interés</h3>
+                <div class="cards">
+                  <div class="card" *ngFor="let punto of puntos" (click)="centrarEnPunto(punto)">
+                    <img [src]="punto.imagen || 'https://via.placeholder.com/400x200?text=Sin+Imagen'" alt="Imagen de {{ punto.nombre }}" />
+                    <div class="card-content">
+                      <h4>{{ punto.nombre }}</h4>
+                      <p>{{ punto.descripcion }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="ver-mas">
+                <button routerLink="/naturaleza">Ampliar información sobre la ruta</button>
+                </div>
+
+              <div class="audio-player-container">
+                <h3>Audios de la Ruta</h3>
+                <div class="audio-player">
+                  <div class="audio-info">
+                    <h4>{{ currentAudio?.title || 'Selecciona un audio' }}</h4>
+                    <p>{{ currentAudio?.description || 'Escucha los sonidos de la ruta' }}</p>
+                  </div>
+                  <div class="audio-controls">
+                    <button class="btn btn-outline-primary" (click)="previousAudio()" [disabled]="!hasPreviousAudio()">
+                      <i class="bi bi-skip-start-fill"></i>
+                    </button>
+                    <button class="btn btn-primary" (click)="togglePlay()">
+                      <i class="bi" [class.bi-play-fill]="!isPlaying" [class.bi-pause-fill]="isPlaying"></i>
+                    </button>
+                    <button class="btn btn-outline-primary" (click)="nextAudio()" [disabled]="!hasNextAudio()">
+                      <i class="bi bi-skip-end-fill"></i>
+                    </button>
+                  </div>
+                  <div class="audio-progress">
+                    <div class="progress-bar" [style.width]="progress + '%'"></div>
+                  </div>
+                  <div class="audio-time">
+                    <span>{{ currentTime | date:'mm:ss' }}</span>
+                    <span>{{ duration | date:'mm:ss' }}</span>
+                  </div>
+                </div>
+              </div>
+
+                    <!--- Trekking info-->
+                    <app-trekking-info
+                    [title]="'Ruta del valle del Aranda'"
+                    [distance]="'18-20 km'"
+                    [difficulty]="'Moderada (con tramos largos pero accesibles)'"
+                    [duration]="'6–7 horas'"
+                    [elevation]="'400-500 m (menos exigente que Isuela, con pendientes suaves)'"
+                    [season]="'Primavera y otoño (paisaje verde, temperaturas suaves; en verano soportable con agua suficiente)'"
+                    [equipment]="['Calzado cómodo de senderismo.', 'Agua (mín. 1.5–2L)', 'Gorro y protección solar.', 'Ropa cómoda, algo de abrigo si madrugas', 'Cámara o móvil para fotos (hay vistas muy chulas del Moncayo)']"
+                    [tips]="'Ruta larga pero sin gran dificultad técnica. Llevar algo de comida o snack. Ideal para descubrir el patrimonio celtíbero del Aranda.'"
+                    />
+
+<!-- Footer section -->
+
+
+              <footer class="footer-main">
+                <div class="footer-content">
+                  <div class="footer-brand">
+                    <h4>Explora Ar-anda</h4>
+                    <p>Descubre rutas ancestrales y tesoros arqueologicos<p>
+                  </div>
+                  <div class="footer-links">
+                    <a routerLink="/politicas/privacidad">Privacidad</a>
+                    <a routerLink="/politicas/terminos">Terminos</a>
+                    <a routerLink="/politicas/cookies">Cookies</a>
+                  </div>
+                </div>
+
+
+                <!-- Logos institucionales --> 
+                <div class="footer-logos">
+                  <img src="assets/footer/FOOTER_PST.jpg" alt="Logotipos institucionales" />
+                </div>
+
+                <div class="footer-bottom">
+                  <p>© 2025 Ar-anda. Todos los derechos reservados.</p>
+                </div>
+              </footer>
+  
+              <app-navigation-footer></app-navigation-footer>
+
+              <style>
+                .audio-player-container {
+                  max-width: 800px;
+                  margin: 2rem auto;
+                  padding: 1.5rem;
+                  background: #fff;
+                  border-radius: 12px;
+                  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }
+
+                .audio-player-container h3 {
+                  color: var(--accent-color);
+                  margin-bottom: 1.5rem;
+                  text-align: center;
+                }
+
+                .audio-player {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 1rem;
+                }
+
+                .audio-info {
+                  text-align: center;
+                }
+
+                .audio-info h4 {
+                  margin: 0;
+                  color: #333;
+                }
+
+                .audio-info p {
+                  margin: 0.5rem 0 0;
+                  color: #666;
+                  font-size: 0.9rem;
+                }
+
+                .audio-controls {
+                  display: flex;
+                  justify-content: center;
+                  gap: 1rem;
+                  margin: 1rem 0;
+                }
+
+                .audio-controls .btn {
+                  width: 45px;
+                  height: 45px;
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 1.2rem;
+                  transition: all 0.3s ease;
+                }
+
+                .audio-controls .btn:hover {
+                  transform: scale(1.1);
+                }
+
+                .audio-progress {
+                  width: 100%;
+                  height: 6px;
+                  background: #e9ecef;
+                  border-radius: 3px;
+                  overflow: hidden;
+                  cursor: pointer;
+                }
+
+                .audio-progress .progress-bar {
+                  height: 100%;
+                  background: var(--accent-color);
+                  transition: width 0.1s linear;
+                }
+
+                .audio-time {
+                  display: flex;
+                  justify-content: space-between;
+                  color: #666;
+                  font-size: 0.9rem;
+                }
+              </style>

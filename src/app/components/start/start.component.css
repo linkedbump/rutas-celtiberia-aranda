@@ -69,6 +69,7 @@
                   }
                 }
               }
+
               .icon-circle {
                 display: flex;
                 justify-content: center;
@@ -91,5 +92,178 @@
             }
             
             
+            #leaflet-map-instance {
+              width: 100%;
+              height: 500px;
+              border-radius: 10px;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+              overflow: hidden;
+              transition: transform 0.3s ease;
+
+              :hover {
+                transform: scale(1.02);
+              }
+            }
 
 
+            /* Estilos para los controles de zoom de Leaflet */
+            .leaflet-control-zoom a {
+              background-color: rgba(255, 255, 255, 0.8);
+              border: none;
+              border-radius: 5px;
+              padding: 8px 12px;
+              font-family: 'Helvetica Neue', sans-serif;
+              cursor: pointer;
+              transition: background-color 0.2s ease;
+              color: #333;
+              text-decoration: none;
+            }
+
+            .leaflet-control-zoom a:hover {
+              background-color: rgba(255, 255, 255, 1);
+            }
+
+            /* Estilos para otros controles de Leaflet, como capas o atribuciones */
+            .leaflet-control-attribution,
+            .leaflet-control-layers {
+              font-family: 'Helvetica Neue', sans-serif;
+              background: rgba(255, 255, 255, 0.8);
+              border-radius: 5px;
+              padding: 4px 8px;
+            }
+            
+            /* Contenedor de la información de la ruta */
+            .route-info {
+              background-color: #fff;
+              border: 1px solid #eaeaea;
+              border-radius: 10px;
+              padding: 20px;
+              margin-top: 20px;
+              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+              font-family: 'Helvetica Neue', sans-serif;
+              color: #333;
+            }
+
+            /* Título */
+            .route-info h3 {
+              font-size: 1.5rem;
+              margin-bottom: 15px;
+            }
+
+            /* Párrafos */
+            .route-info p {
+              font-size: 1rem;
+              line-height: 1.5;
+              margin: 10px 0;
+            }
+
+            /* Enfasis en los <strong> para un toque moderno */
+            .route-info strong {
+              color: #333333;
+            }
+
+            /* Contenedor para los iconos (línea "Apto para:") */
+            .route-icons {
+              display: inline-flex;
+              gap: 50px;
+              margin-left: 50px;
+              vertical-align: middle;
+            }
+
+            /* Estilos base para los iconos personalizados */
+            .icon {
+              display: inline-block;
+              width: 40px;
+              height: 40px;
+              background-size: contain;
+              background-repeat: no-repeat;
+              background-position: center;
+            }
+
+            /* Ejemplos de iconos: sustituye 'ruta/del/icono.svg' por la ruta real de tus imágenes */
+
+            /* Icono para "Accesibilidad:" (por ejemplo, un check elegante) */
+            .icon-access {
+              background-image: url('/assets/images/icons/acces.svg');
+            }
+
+            /* Icono para "Apto para:" */
+            /* Caminar */
+            .icon-walk {
+              background-image: url('/assets/images/icons/rutas-icon.svg');
+            }
+
+            /* Bicicleta */
+            .icon-bike {
+              background-image: url('/assets/images/icons/bike.svg');
+            }
+
+            /* Familia */
+            .icon-family {
+              background-image: url('/assets/images/icons/family.svg');
+            }
+
+            /* Mascota (perro) */
+            .icon-dog {
+              background-image: url('/assets/images/icons/dog.svg');
+}
+
+.footer-main {
+  background: #f9f9f9;
+  margin: 32px, 0, 64px, 0;
+  border-top: 1px solid #e0e0e0;
+  padding: 2rem 1rem 1rem;
+  font-size: 0.9rem;
+  color: #444;
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 1rem;
+  }
+
+  .footer-brand h4 {
+    margin: 0 0 0.25rem;
+    font-weight: bold;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+
+    a {
+      text-decoration: none;
+      color: #666;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+  .footer-bottom {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #777;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
+}
+
+.footer-logos {
+  display: flex;
+  margin-top: 2rem;
+  justify-content: center;
+  padding: 1rem 0;
+  
+
+  img {
+    max-width: 60%;
+    height: auto;
+  }
+}

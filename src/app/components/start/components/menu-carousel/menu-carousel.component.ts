@@ -14,6 +14,7 @@ interface MenuItem {
   imports: [NgFor],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
+  <div class="menu-wrapper">
   <div class="menu-carousel">
                 <div class="menu-header">
                   <h2>Descurbe</h2>
@@ -37,12 +38,22 @@ interface MenuItem {
         </div>
       </div>
     </div>
+    </div>
+  </div>
   `,
   styles: [`
+  .menu-wrapper{
+    width: 100%;
+    background-color: #fff;
+    overflow: hidden;
+    margin-top: 20px;
+  }
   .menu-carousel {
-    padding-top: 50px;
+    padding-top: 100px;
+    padding-bottom: 100px;
     text-align: left;
-    margin-left: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
     
   }
   .menu-header {
@@ -51,7 +62,9 @@ interface MenuItem {
         font-size: 30px;
         color: var(--primary-dark);
         margin: 0;
-        font-weight: 800;       
+        font-weight: 800;   
+        text-align: center;
+            
 
       }
 
@@ -60,6 +73,7 @@ interface MenuItem {
         font-size: 14px;
         color: #6e6e6e;
         margin: 5px 0 20px;
+        text-align: center;
       }
     }
     .menu-carousel-container {
@@ -70,6 +84,7 @@ interface MenuItem {
 
     .menu-items {
       display: flex;
+      justify-content: space-evenly;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
@@ -87,7 +102,7 @@ interface MenuItem {
 
     .menu-item {
       flex: 0 0 auto;
-      width: calc(100% / 4.5);
+      width: calc(100% / 7);
       min-width: 100px;
       scroll-snap-align: center;
       display: flex;
@@ -109,8 +124,8 @@ interface MenuItem {
     
       &:hover {
         box-shadow: 3px 3px 4px rgba(255, 255, 255, 0.8), 
-                     inset 4px 4px 10px rgba(76, 56, 133, 0.5);
-                     background: rgba(224, 216, 233, 0.3); 
+                     inset 4px 4px 10px rgba(133, 56, 64, 0.5);
+                     background: rgba(233, 219, 216, 0.3); 
       }
     }
 
@@ -123,14 +138,14 @@ interface MenuItem {
 
     .iconify {
       font-size: 40px;
-      color: #4c3885;
+      color: #ff8a91;
      
     }
 
     iconify-icon {
       width: 60px !important;  /* Añadido !important para asegurar que se aplica*/
       height: 60px !important; /* Añadido !important para asegurar que se aplica*/
-      color: #4c3885;
+      color: #ff8a91;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
@@ -153,7 +168,7 @@ interface MenuItem {
 /* Media queries */
 @media (max-width: 768px) {
       .menu-items {
-        min-width: calc(60px * 3);
+        min-width: calc(60px * 4);
         padding: 0 5px;
       }
 
@@ -183,11 +198,11 @@ interface MenuItem {
     /* Media query muy pequeños*/
     @media (max-width: 320px) {
       .menu-items {
-        min-width: calc(50px * 2.5);
+        min-width: calc(50px * 3);
       }
 
       .menu-item {
-        width: calc(100% / 2.5); /* Mostrar 2.5 elementos por vista*/
+        width: calc(100% / 3); /* Mostrar 2.5 elementos por vista*/
         min-width: 70px;
       }
 
@@ -219,26 +234,15 @@ export class MenuCarouselComponent implements AfterViewInit {
 
 
   menuItems: MenuItem[] = [
-    {
-      icon: 'material-symbols-light:hiking',
-      label: 'RUTAS',
-      link: '/rutas'
-    },
+    //{      icon: 'material-symbols-light:hiking',      label: 'RUTAS',      link: '/celtiberia'//    },// comentados para no mostrar
+    
     {
       icon: 'ph:castle-turret-light',
-      label: 'PUNTOS DE INTERÉS',
-      link: '/puntos'
+      label: 'RUTAS',
+      link: '/celtiberia'
     },
-    {
-      icon: 'ph:farm-thin',
-      label: 'ALOJAMIENTO',
-      link: '/alojamiento'
-    },
-    {
-      icon: 'ph:fork-knife-thin',
-      label: 'GASTRONOMÍA',
-      link: '/gastronomia'
-    },
+    //{icon: 'ph:farm-thin', label: 'ALOJAMIENTO', link: '/alojamiento'},// comentados para no mostrar
+    //{icon: 'ph:fork-knife-thin', label: 'GASTRONOMÍA', link: '/gastronomia'},//
     {
       icon: 'ph:tree-thin',
       label: 'NATURALEZA',
@@ -247,13 +251,9 @@ export class MenuCarouselComponent implements AfterViewInit {
     {
       icon: 'ph:balloon-thin',
       label: 'EVENTOS',
-      link: '/eventos'
+      link: '/evento'
     },
-    {
-      icon: 'material-symbols-light:linked-services-outline',
-      label: 'SERVICIOS',
-      link: '/servicios'
-    }
+    //{icon: 'material-symbols-light:linked-services-outline',label: 'SERVICIOS',link: '/servicios'} // comentado para no mostrar
   ];
 
   ngAfterViewInit(): void {

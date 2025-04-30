@@ -1,0 +1,86 @@
+<section class="celtiberia-hero">
+                <img classs="" src="assets\img\celtiberiaHero.jpg" alt="Celtiberia: Tierra de Historia" />
+                <div class="celtiberia-hero-overlay">
+                <h1>Celtiberia: el país de las mujeres y hombres libres.</h1>
+                <p>Descubre las rutas históricas del valle del Aranda y del
+                  Isuela. Sumérgete en el legado celtibérico en el corazón de
+                  la cordillera que lo vio nacer.
+                  </p>
+              </div>
+             </section>
+              
+              <section class="celtiberia-routes">
+                <h2>Explora nuestras rutas</h2>
+                <p>Selecciona una de las rutas para conocer sus puntos de interés, historia y paisaje.</p>
+                <div class="route-cards">
+                  <a [routerLink]="['/celtiberia/ruta-aranda']" class="route-card">
+                    <img src="assets/img/puntos/captionMon.jpg" alt="Ruta Aranda" />
+                    <div class="route-info">
+                      <h3>Ruta del valle del Aranda</h3>
+                      <p>Explora el valle histórico de Aranda con sitios celtibéricos únicos.</p>
+                    </div>
+                  </a>
+                  <a [routerLink]="['/celtiberia/ruta-isuela']" class="route-card">
+                    <img src="assets/img/puntos/Isuela.avif" alt="Ruta Isuela" />
+                    <div class="route-info">
+                      <h3>Ruta del valle del Isuela</h3>
+                      <p>Adéntrate en los paisajes y restos arqueológicos del Isuela.</p>
+                    </div>
+                  </a>
+                </div>
+              </section>
+              
+              <section class="celtiberia-cta">
+                <button routerLink="/naturaleza">Ampliar información</button>
+              </section>
+
+              <div class="audio-player-container">
+                <h3>Audios de la Ruta</h3>
+                <div class="audio-player">
+                  <div class="audio-info">
+                    <h4>{{ currentAudio?.title || 'Selecciona un audio' }}</h4>
+                    <p>{{ currentAudio?.description || 'Escucha los sonidos de la ruta' }}</p>
+                  </div>
+                  <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                  </div>
+                  <div class="audio-controls">
+                    <button class="btn btn-primary" (click)="togglePlay()" [disabled]="!!errorMessage">
+                      <i class="bi" [class.bi-play-fill]="!isPlaying" [class.bi-pause-fill]="isPlaying"></i>
+                    </button>
+                  </div>
+                  <div class="audio-progress">
+                    <div class="progress-bar" [style.width]="progress + '%'"></div>
+                  </div>
+                  <div class="audio-time">
+                    <span>{{ currentTime | date:'mm:ss' }}</span>
+                    <span>{{ duration | date:'mm:ss' }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <footer class="footer-main">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h4>Explora Ar-anda</h4>
+        <p>Descubre rutas ancestrales y tesoros arqueologicos<p>
+      </div>
+      <div class="footer-links">
+        <a routerLink="/politicas/privacidad">Privacidad</a>
+        <a routerLink="/politicas/terminos">Terminos</a>
+        <a routerLink="/politicas/cookies">Cookies</a>
+      </div>
+    </div>
+
+    <!-- Logos institucionales --> 
+    <div class="footer-logos">
+      <img src="assets/footer/FOOTER_PST.jpg" alt="Logotipos institucionales" />
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Ar-anda. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  
+<app-navigation-footer></app-navigation-footer>
+              

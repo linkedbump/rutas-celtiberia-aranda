@@ -3,32 +3,84 @@ import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angula
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
 
 @Component({
   selector: 'app-ar-viewer',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="ar-container">
-      <button class="back-button" (click)="goBack()">←</button>
-      
-      <canvas #canvas></canvas>
-      
-      <div class="info-overlay">
-        <h2>{{ currentPOI?.title }}</h2>
-        <p>{{ currentPOI?.description }}</p>
-        
-        <button class="audio-button" (click)="toggleAudio()">
-          <i class="bi" [class.bi-play-fill]="!isPlaying" [class.bi-pause-fill]="isPlaying"></i>
-          Escuchar historia
-        </button>
-      </div>
+   <div class="ar-container">
+  <div class="ar-header">
+    <button class="back-button" (click)="goBack()">←</button>
+    <div class="info-overlay">
+      <h2>{{ currentPOI?.title }}</h2>
+      <p>{{ currentPOI?.description }}</p>
     </div>
+  </div>
+
+  <canvas #canvas></canvas>
+</div>
+
   `,
-  // ... (mantener los mismos estilos del ejemplo anterior)
-})
+  styles: [`
+    .ar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: linear-gradient(to right,var(--primary-color), var(--primary-dark));
+  color: white;
+  border-radius: 8px 8px 0 0;
+}
+
+.ar-header .back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background: var(--secondary-dark);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.ar-header .back-button:hover {
+  background: #2a5298;
+  transform: scale(1.05);
+}
+
+.info-overlay h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.info-overlay p {
+  margin: 0.25rem 0 0;
+  font-size: 0.95rem;
+  color: #dcdcdc;
+}
+
+canvas {
+  width: 100%;
+  height: 50vh;
+  display: block;
+  background: #111;
+  margin: 0 auto;
+  border-radius: 0 0 8px 8px;
+}
+
+
+  `]
+})// ... (mantener los mismos estilos del ejemplo anterior
+
 export class ArViewerComponent implements OnInit, AfterViewInit {
   @ViewChild('canvas') canvas!: ElementRef<HTMLCanvasElement>;
   
@@ -45,33 +97,38 @@ export class ArViewerComponent implements OnInit, AfterViewInit {
     {
       id: 1,
       title: 'Caetra',
+      position: { lat: 41.58379, lng: -1.70254 }, // Coordenadas de ejemplo
       modelPath: 'assets/models/caetra.glb',
-      description: 'Escudo circular utilizado por los guerreros celtíberos.'
+      description: 'Escudo pequeño circular usado por los guerreros celtibéricos'
     },
     {
       id: 2,
       title: 'Casa Celtíbera',
+      position: { lat: 41.5765, lng: -1.7918 }, // Coordenadas de ejemplo
       modelPath: 'assets/models/casa.glb',
-      description: 'Reconstrucción de una vivienda típica celtíbera.'
+      description: 'De planta rectangular, paredes de mampostería y barro y tejado vegetal'
     },
     {
       id: 3,
-      title: 'Casco Tipo 1',
+      title: 'Casco celtíbero',
+      position: { lat: 41.58400, lng: -1.78744 }, // Coordenadas de ejemplo
       modelPath: 'assets/models/casco1.glb',
-      description: 'Casco ceremonial celtíbero del tipo Montefortino.'
+      description: 'modelo de aire calcídico que se forjaba en hierro en Aratis (c. 200 a.C.)'
     },
     {
       id: 4,
-      title: 'Casco Tipo 2',
+      title: 'Casco celtíbero',
+      position: { lat: 41.5740, lng: -1.7890 }, // Coordenadas de ejemplo
       modelPath: 'assets/models/casco2.glb',
       description: 'Casco de combate celtíbero con decoración característica.'
-    },{
+    },   
+    {
       id: 5,
-      title: 'Druida',
-      position: { lat: 41.5740, lng: -1.7800 }, // Coordenadas de ejemplo
-      modelPath: 'assets/models/druida.glb',
-      description: 'Casco de combate celtíbero con decoración característica.'
-    }
+      title: 'Espada',
+      position: { lat: 41.55108, lng: -1.65014 }, // Coordenadas de ejemplo
+      modelPath: 'assets/models/espadaDeAntenas.glb',
+      description: 'Espada de antenas celtibera.'
+    },
   ];
 
   constructor(
@@ -83,6 +140,7 @@ export class ArViewerComponent implements OnInit, AfterViewInit {
     this.route.params.subscribe(params => {
       const poiId = parseInt(params['id']);
       this.currentPOI = this.pointsOfInterest.find(poi => poi.id === poiId);
+                  
       if (this.currentPOI && this.scene) {
         this.loadModel(this.currentPOI.modelPath);
       }

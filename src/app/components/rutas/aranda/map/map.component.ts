@@ -1,218 +1,180 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import * as L from 'leaflet';
+import { NavigationFooterComponent } from '../../../../shared/navigation-footer/navigation-footer.component';
+import { MapStyleService } from '../../../../services/map-style.service';
 
 // Define un tipo para las claves de routeInfo
-type RouteKey = 'valleAranda' | 'aratis' | 'bosqueSagrado' | 'oseja' | 'tierga';
+type RouteKey = 'ruta1' | 'ruta2' | 'ruta3' | 'ruta4' | 'ruta5';
 
 @Component({
   selector: 'app-map',
+  standalone: true,
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./map.component.css'],
+  imports: [
+    CommonModule,
+    RouterModule,
+    NavigationFooterComponent
+  ]
 })
 export class MapComponent implements OnInit {
-  region: string = ''; // Región seleccionada
-  selectedRoute: any = null; // Almacena la información de la ruta seleccionada
-
-  private map!: L.Map;
-  private routes: { [key: string]: L.LayerGroup } = {}; // Almacena las rutas disponibles
-
-  // Icono por defecto
-  private defaultIcon = L.icon({
-    iconUrl: 'assets/leaflet/marker-icon.png', // Path a los iconos en Angular
-    iconRetinaUrl: 'assets/leaflet/marker-icon-2x.png',
-    shadowUrl: 'assets/leaflet/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
+  private map: L.Map | null = null;
+  private markers: L.Marker[] = [];
+  private routeLines: L.Polyline[] = [];
+  selectedRoute: any = null;
 
   // Información de las rutas
-  routeInfo = {
-    valleAranda: {
-      title: 'El valle de Aranda: Tras las huellas de los Celtíberos',
-      description: 'Una ruta que comienza en Gotor, pasando por el yacimiento del Calvario y terminando en el Centro de Interpretación de Aranda de Moncayo. Ideal para quienes buscan conectar con la historia de los celtíberos y disfrutar de un entorno natural.',
+  private routeInfo: Record<RouteKey, any> = {
+    ruta1: {
+      name: 'Valle del Aranda',
+      description: 'Ruta que recorre el valle del río Aranda, mostrando su belleza natural y paisajes característicos.',
       points: [
-        { icon: 'mdi-light:map-marker', text: 'Convento Dominico de la Consolación' },
-        { icon: 'mdi:information', text: 'Yacimiento del Calvario (a 1 km de Gotor, pequeño poblado celtíbero)' },
-        { icon: 'mdi:eye', text: 'Mirador de Aranda de Moncayo (vista del embalse de Maidevera y el cerro de Aratis)' }
+        { lat: 41.5740, lng: -1.7800, text: 'Inicio de la ruta', icon: 'mdi:map-marker-start' },
+        { lat: 41.5745, lng: -1.7805, text: 'Mirador del Valle', icon: 'mdi:view-point' },
+        { lat: 41.5750, lng: -1.7810, text: 'Final de la ruta', icon: 'mdi:map-marker-end' }
       ],
       details: [
-        { icon: 'mdi:road', text: 'Longitud: 7 km' },
-        { icon: 'mdi:clock', text: 'Duración: 2.5 horas' },
-        { icon: 'mdi:check-circle', text: 'Dificultad: Fácil (apto para familias)' },
-        { icon: 'mdi:foot-print', text: 'Terreno: Senderos rurales y caminos asfaltados' },
-        { icon: 'mdi:water', text: 'Recomendaciones: Llevar agua y calzado cómodo' }
+        { text: 'Distancia: 5 km', icon: 'mdi:map-distance' },
+        { text: 'Dificultad: Media', icon: 'mdi:hiking' },
+        { text: 'Duración: 2 horas', icon: 'mdi:clock-outline' }
       ]
     },
-    aratis: {
-      title: 'Aratis: La ciudad de hierro y fuego',
-      description: 'Descripción de la ruta Aratis...',
+    ruta2: {
+      name: 'Aratis',
+      description: 'Ruta histórica que sigue el antiguo camino romano de Aratis.',
       points: [
-        // Puntos de interés para Aratis
+        { lat: 41.5740, lng: -1.7800, text: 'Inicio de la ruta', icon: 'mdi:map-marker-start' },
+        { lat: 41.5745, lng: -1.7805, text: 'Ruinas romanas', icon: 'mdi:ruins' },
+        { lat: 41.5750, lng: -1.7810, text: 'Final de la ruta', icon: 'mdi:map-marker-end' }
       ],
       details: [
-        // Detalles de la ruta Aratis
+        { text: 'Distancia: 4 km', icon: 'mdi:map-distance' },
+        { text: 'Dificultad: Fácil', icon: 'mdi:hiking' },
+        { text: 'Duración: 1.5 horas', icon: 'mdi:clock-outline' }
       ]
     },
-    bosqueSagrado: {
-      title: 'Bosque Sagrado: El bosque sagrado de los Celtíberos',
-      description: 'Descripción de la ruta Bosque Sagrado...',
+    ruta3: {
+      name: 'Oseja',
+      description: 'Ruta que atraviesa el pueblo de Oseja y sus alrededores.',
       points: [
-        // Puntos de interés para Bosque Sagrado
+        { lat: 41.5740, lng: -1.7800, text: 'Inicio de la ruta', icon: 'mdi:map-marker-start' },
+        { lat: 41.5745, lng: -1.7805, text: 'Centro de Oseja', icon: 'mdi:home-city' },
+        { lat: 41.5750, lng: -1.7810, text: 'Final de la ruta', icon: 'mdi:map-marker-end' }
       ],
       details: [
-        // Detalles de la ruta Bosque Sagrado
+        { text: 'Distancia: 3 km', icon: 'mdi:map-distance' },
+        { text: 'Dificultad: Fácil', icon: 'mdi:hiking' },
+        { text: 'Duración: 1 hora', icon: 'mdi:clock-outline' }
       ]
     },
-    oseja: {
-      title: 'Oseja: Paisajes celtas y tradición',
-      description: 'Descripción de la ruta Oseja...',
+    ruta4: {
+      name: 'Bosque Sagrado',
+      description: 'Ruta mística a través del bosque sagrado con árboles centenarios.',
       points: [
-        // Puntos de interés para Oseja
+        { lat: 41.5740, lng: -1.7800, text: 'Inicio de la ruta', icon: 'mdi:map-marker-start' },
+        { lat: 41.5745, lng: -1.7805, text: 'Árbol sagrado', icon: 'mdi:tree' },
+        { lat: 41.5750, lng: -1.7810, text: 'Final de la ruta', icon: 'mdi:map-marker-end' }
       ],
       details: [
-        // Detalles de la ruta Oseja
+        { text: 'Distancia: 6 km', icon: 'mdi:map-distance' },
+        { text: 'Dificultad: Media', icon: 'mdi:hiking' },
+        { text: 'Duración: 2.5 horas', icon: 'mdi:clock-outline' }
       ]
     },
-    tierga: {
-      title: 'Tierga: y el legado Celtíberico',
-      description: 'Descripción de la ruta de tierga...',
+    ruta5: {
+      name: 'Tierga',
+      description: 'Ruta que conecta con el pueblo de Tierga y sus puntos de interés.',
       points: [
-        // Puntos de interés para Oseja
+        { lat: 41.5740, lng: -1.7800, text: 'Inicio de la ruta', icon: 'mdi:map-marker-start' },
+        { lat: 41.5745, lng: -1.7805, text: 'Mirador de Tierga', icon: 'mdi:view-point' },
+        { lat: 41.5750, lng: -1.7810, text: 'Final de la ruta', icon: 'mdi:map-marker-end' }
       ],
       details: [
-        // Detalles de la ruta Oseja
+        { text: 'Distancia: 4.5 km', icon: 'mdi:map-distance' },
+        { text: 'Dificultad: Media', icon: 'mdi:hiking' },
+        { text: 'Duración: 1.5 horas', icon: 'mdi:clock-outline' }
       ]
     }
   };
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private mapStyle: MapStyleService) {}
 
   ngOnInit(): void {
-    // Obtener región desde la URL
-    this.region = this.route.snapshot.paramMap.get('region') || '';
-    this.loadRoutesByRegion(this.region);
-
-    this.setDefaultIcon();
     this.initMap();
-    this.defineRoutes();
-  }
-
-  // Método para cargar rutas según región
-  loadRoutesByRegion(region: string): void {
-    switch (region) {
-      case 'aranda':
-        this.loadRoute('valleAranda'); // Cargar ruta Valle Aranda
-        console.log('Cargando rutas del Valle de Aranda');
-        break;
-      case 'isuela':
-        this.loadRoute('aratis'); // Cargar ruta Aratis
-        console.log('Cargando rutas del Valle de Isuela');
-        break;
-      case 'Tierga':
-        this.loadRoute('tierga'); // Cargar ruta tierga
-        console.log('Cargando rutas de tierga');
-        break;
-      case 'oseja':
-        this.loadRoute('oseja'); // Cargar ruta Oseja
-        console.log('Cargando rutas de Oseja');
-        break;
-      default:
-        console.error('Región no válida');
-        break;
-    }
-  }
-
-  private setDefaultIcon(): void {
-    L.Marker.prototype.options.icon = this.defaultIcon;
   }
 
   private initMap(): void {
-    this.map = L.map('map').setView([41.6691, -1.7001], 13);
+    // Inicializar el mapa
+    this.map = L.map('map').setView([41.5740, -1.7800], 13);
 
+    // Añadir capa de OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(this.map);
 
-    setTimeout(() => {
-      this.map.invalidateSize(); // Ajusta el tamaño del mapa dinámicamente
-    }, 0);
+    // Añadir marcadores y rutas
+    this.addMarkersAndRoutes();
   }
 
-  private defineRoutes(): void {
-    // Ruta: Valle del Aranda
-    const valleAranda = L.layerGroup([
-      L.polyline([
-        [41.6691, -1.7001],
-        [41.6679, -1.6980],
-        [41.6323, -1.7600],
-        [41.6310, -1.7590]
-      ], { color: 'red', weight: 4, opacity: 0.7 }),
-      L.marker([41.6691, -1.7001]).bindPopup('Gotor: Convento Dominico'),
-      L.marker([41.6679, -1.6980]).bindPopup('Yacimiento del Calvario'),
-      L.marker([41.6323, -1.7600]).bindPopup('Mirador de Aranda de Moncayo'),
-      L.marker([41.6310, -1.7590]).bindPopup('Centro de Interpretación')
-    ]);
-
-    // Ruta: Aratis
-    const aratis = L.layerGroup([
-      L.polyline([
-        [41.5782, -1.7921], // Mirador de Aranda de Moncayo
-        [41.5831, -1.7850], // Yacimiento de Aratis
-        [41.5840, -1.7800]  // Peñas Paseras
-      ], { color: 'yellow', weight: 4, opacity: 0.7 }),
-  
-      // Marcadores con descripciones
-      L.marker([41.5782, -1.7921]).bindPopup('Inicio: Mirador de Aranda de Moncayo'),
-      L.marker([41.5831, -1.7850]).bindPopup('Yacimiento de Aratis: Muralla, torres defensivas y necrópolis'),
-      L.marker([41.5840, -1.7800]).bindPopup('Peñas Paseras: Necrópolis con santuario y muro astrológico')
-        ]);
-
-    // Ruta: Bosque Sagrado
-    const bosqueSagrado = L.layerGroup([
-      L.polyline([
-        [41.6960, -1.8160],
-        [41.7000, -1.8300]
-      ], { color: 'yellow', weight: 4, opacity: 0.7 }),
-      L.marker([41.6960, -1.8160]).bindPopup('Purujosa: Punto de inicio'),
-      L.marker([41.7000, -1.8300]).bindPopup('Bosque Sagrado de la Celtiberia')
-    ]);
-
-    // Ruta: Oseja
-    const oseja = L.layerGroup([
-      L.polyline([
-        [41.6940, -1.8120],
-        [41.7000, -1.8180]
-      ], { color: 'orange', weight: 4, opacity: 0.7 }),
-      L.marker([41.6940, -1.8120]).bindPopup('Oseja: Inicio de la ruta'),
-      L.marker([41.7000, -1.8180]).bindPopup('Cerro del yacimiento celtíbero')
-    ]);
-
-    // Añadir rutas al objeto
-    this.routes = { valleAranda, aratis, bosqueSagrado, oseja };
-  }
-
-  loadRoute(routeName: RouteKey): void {
-    // Limpia las capas actuales del mapa
+  private addMarkersAndRoutes(): void {
+    // Limpiar marcadores y rutas existentes
     this.clearMap();
 
-    // Carga la ruta seleccionada
-    const route = this.routes[routeName];
-    if (route) {
-      route.addTo(this.map);
+    // Añadir marcadores y rutas para cada ruta
+    Object.entries(this.routeInfo).forEach(([key, route]) => {
+      // Añadir marcadores
+      route.points.forEach((point: any) => {
+        const marker = L.marker([point.lat, point.lng], { icon: this.mapStyle.customIcon })
+          .bindPopup(`<b>${route.name}</b><br>${point.text}`)
+          .addTo(this.map!);
+        this.markers.push(marker);
+      });
 
-      //Ajustar el tamaño del mapa
-      setTimeout(() => {
-        this.map.invalidateSize();
-      }, 0);
-
-      this.selectedRoute = this.routeInfo[routeName]; // Actualiza la información de la ruta
-    }
+      // Añadir línea de ruta
+      const routeLine = L.polyline(
+        route.points.map((point: any) => [point.lat, point.lng]),
+        { color: 'blue', weight: 3 }
+      ).addTo(this.map!);
+      this.routeLines.push(routeLine);
+    });
   }
 
   private clearMap(): void {
-    Object.values(this.routes).forEach(route => this.map.removeLayer(route));
+    // Eliminar marcadores
+    this.markers.forEach(marker => marker.remove());
+    this.markers = [];
+
+    // Eliminar líneas de ruta
+    this.routeLines.forEach(line => line.remove());
+    this.routeLines = [];
+  }
+
+  selectRoute(routeKey: RouteKey): void {
+    this.selectedRoute = this.routeInfo[routeKey];
+    this.clearMap();
+
+    // Añadir solo los marcadores y la ruta seleccionada
+    const route = this.routeInfo[routeKey];
+    
+    // Añadir marcadores
+    route.points.forEach((point: any) => {
+      const marker = L.marker([point.lat, point.lng])
+        .bindPopup(`<b>${route.name}</b><br>${point.text}`)
+        .addTo(this.map!);
+      this.markers.push(marker);
+    });
+
+    // Añadir línea de ruta
+    const routeLine = L.polyline(
+      route.points.map((point: any) => [point.lat, point.lng]),
+      { color: 'blue', weight: 3 }
+    ).addTo(this.map!);
+    this.routeLines.push(routeLine);
+
+    // Centrar el mapa en la ruta seleccionada
+    const bounds = L.latLngBounds(route.points.map((point: any) => [point.lat, point.lng]));
+    this.map!.fitBounds(bounds);
   }
 }

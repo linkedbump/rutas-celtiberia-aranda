@@ -1,31 +1,92 @@
 <div class="container-fluid start-page p-0">
-                <!-- Encabezado -->
-                <header class="header px-3 py-3 d-flex justify-content-between align-items-center">
-                  <i class="bi bi-search"></i>
-                  <h1 class="text-center flex-grow-1">Explora</h1>
-                  <div class="icon-circle">
-                    <a routerLink="/dashboard">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 20 20"><path fill="#4a0c85" d="M9.993 10.573a4.5 4.5 0 1 0 0-9a4.5 4.5 0 0 0 0 9M10 0a6 6 0 0 1 3.04 11.174c3.688 1.11 6.458 4.218 6.955 8.078c.047.367-.226.7-.61.745c-.383.045-.733-.215-.78-.582c-.54-4.19-4.169-7.345-8.57-7.345c-4.425 0-8.101 3.161-8.64 7.345c-.047.367-.397.627-.78.582c-.384-.045-.657-.378-.61-.745c.496-3.844 3.281-6.948 6.975-8.068A6 6 0 0 1 10 0"/></svg>
-                    </a>
-                  </div>
-                </header>
-              
-                <!-- Subtítulo -->
-                <div class="subheader px-3">
-                  <h2 class="text-center flex-grow-1">La Comarca del Aranda</h2>
-                </div>
+  <!-- Encabezado -->
+  <header class="header px-3 py-3 d-flex justify-content-between align-items-center">
+      <img src="assets/images/Logo.png" alt="Logo" class="logo" width="150" height="50">
+      
+      <h1 class="text-center flex-grow-1">Explora</h1>
+      <div class="icon-circle">
+          <a routerLink="/dashboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 20 20">
+                  <path fill="#4a0c85"
+                      d="M9.993 10.573a4.5 4.5 0 1 0 0-9a4.5 4.5 0 0 0 0 9M10 0a6 6 0 0 1 3.04 11.174c3.688 1.11 6.458 4.218 6.955 8.078c.047.367-.226.7-.61.745c-.383.045-.733-.215-.78-.582c-.54-4.19-4.169-7.345-8.57-7.345c-4.425 0-8.101 3.161-8.64 7.345c-.047.367-.397.627-.78.582c-.384-.045-.657-.378-.61-.745c.496-3.844 3.281-6.948 6.975-8.068A6 6 0 0 1 10 0" />
+              </svg>
+          </a>
+      </div>
+  </header>
 
-                <!-------    Menu-carousel    -->
-                <app-menu-carousel></app-menu-carousel>              
-                <!-- Carrusel: Lugares -->
-                <app-places-carousel></app-places-carousel>
-                <!-- Carrusel: Las mejores rutas -->
-                <app-rutas-carousel></app-rutas-carousel>
-              
-                <!-- Carrusel: Próximos eventos -->
-                <app-events-carousel></app-events-carousel>
-                
-                <!-- Componente de pie de página -->
-                <app-navigation-footer></app-navigation-footer>              
-              
-              
+  <!-- Subtítulo -->
+  <div class="subheader px-3">
+      <h2 class="text-center flex-grow-1">La Comarca del Aranda</h2>
+  </div>
+
+  <!-- Selección de ruta -->
+  <div class="container mt-3">
+      <label for="routeSelection" class="form-label"><strong>¿Desde dónde vienes?</strong></label>
+      <select id="routeSelection" class="form-select" (change)="seleccionarRuta($event)">
+          <option value="">Selecciona una ruta...</option>
+          <option value="a2">Valle del Aranda: A través de la A-1503, Desde la A-2 (El Frasno) Este. Desde (Ciria) Oeste.</option>
+          <option value="oeste">Valle del Isuela: A través de la A-2302 (Beratón) Oeste. (Morata de jalón) Este.</option>
+      </select>
+  </div>
+
+  <!-- Mapa interactivo -->
+  <div id="map" style="height: 500px;">
+  <div class="container mt-3">
+      <div id="leaflet-map-instance" class="leaflet-container" style="height: 500px;"></div>
+  </div>
+</div>
+
+ <!-- Información de la Ruta -->
+<div class="container route-info">
+    <h3>Información de la Ruta</h3>
+    <p><strong>Duración:</strong> 3-4 horas</p>
+    <p><strong>Dificultad:</strong> Media</p>
+    <p><strong>Accesibilidad:</strong> <span class="icon icon-access"></span></p>
+    <p><strong>Apto para:</strong> 
+       <span class="route-icons">
+         <span class="icon icon-walk"></span>
+         <span class="icon icon-bike"></span>
+         <span class="icon icon-family"></span>
+         <span class="icon icon-dog"></span>
+       </span>
+    </p>
+  </div>
+
+  
+  <!-- Menú de navegación y carouseles -->
+  <app-menu-carousel></app-menu-carousel>
+  <app-places-carousel></app-places-carousel>
+  <app-event-single></app-event-single>
+
+  <!-- <app-events-carousel></app-events-carousel> -->
+  <footer class="footer-main">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h4>Explora Ar-anda</h4>
+        <p>Descubre rutas ancestrales y tesoros arqueologicos<p>
+
+          <div class="footer-sugeridos">
+          <a href="https://www.turismodelaranda.es" target="_blank">www.turismodelaranda.es</a><br>
+          <a href="https://www.comarcadelaranda.com" target="_blank">www.comarcadelaranda.com</a>
+            </div>
+            
+      </div>
+      <div class="footer-links">
+        <a routerLink="/politicas/privacidad">Privacidad</a>
+        <a routerLink="/politicas/terminos">Terminos</a>
+        <a routerLink="/politicas/cookies">Cookies</a>
+      </div>
+    </div>
+  
+    <!-- Logos institucionales --> 
+    <div class="footer-logos">
+      <img src="assets/footer/FOOTER_PST.jpg" alt="Logotipos institucionales" />
+    </div>
+  
+    <div class="footer-bottom">
+      <p>© 2025 Ar-anda. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  <!-- Pie de Página -->
+  <app-navigation-footer></app-navigation-footer>
+</div>

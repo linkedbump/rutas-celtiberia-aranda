@@ -1,0 +1,21 @@
+<section class="trekking-info">
+                <h2><i class="fa-solid fa-person-hiking"></i> {{ title }}</h2>
+                <div class="trekking-grid">
+                  <div><strong>Distancia:</strong> {{ distance }}</div>
+                  <div><strong>Dificultad:</strong> {{ difficulty }}</div>
+                  <div><strong>Duración:</strong> {{ duration }}</div>
+                  <div><strong>Desnivel:</strong> {{ elevation }}</div>
+                  <div><strong>Mejor época:</strong> {{ season }}</div>
+                </div>
+              
+                <div class="trekking-recomendaciones">
+                  <h3>Equipo recomendado:</h3>
+                  <ul>
+                    <li *ngFor="let item of equipment">{{ item }}</li>
+                  </ul>
+              
+                  <h3>Consejos:</h3>
+                  <p>{{ tips }}</p>
+                </div>
+              </section>
+              

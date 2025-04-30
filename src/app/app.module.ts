@@ -1,43 +1,35 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AuthModule } from './auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
-import { RouterModule, Routes } from '@angular/router';
-import { DashboardModule } from './components/dashboard/dashboard.module';
-import { NavigationFooterComponent } from './shared/navigation-footer/navigation-footer.component';
+import { AuthModule } from './auth/auth.module';
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
+import { environment } from '../environments/environment';
+import { FIREBASE_AUTH, FIREBASE_FIRESTORE, FIREBASE_STORAGE } from './firebase.tokens';
 
-const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
-  // Aquí puedes agregar más rutas según necesites
-];
+// Initialize Firebase
+const app = initializeApp(environment.firebase);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
+const storage = getStorage(app);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-   
-  ],
-  
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule,
-    AuthModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    RouterModule.forRoot(routes),
-    DashboardModule,
-    NavigationFooterComponent
+    AuthModule
   ],
-  providers: [],
+  providers: [
+    { provide: FIREBASE_AUTH, useValue: auth },
+    { provide: FIREBASE_FIRESTORE, useValue: firestore },
+    { provide: FIREBASE_STORAGE, useValue: storage }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

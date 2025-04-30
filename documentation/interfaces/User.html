@@ -368,7 +368,8 @@ export class AuthService {
       createdAt: new Date()
     };
     
-    return this.firestore.collection(&#x27;users&#x27;).add(userData);
+    const userRef = doc(this.firestore, 'users', userKey);
+    return setDoc(userRef, userData);
   }
   //Método para login con email y contraseña
   loginWithEmailPassword(email: string, password: string) {

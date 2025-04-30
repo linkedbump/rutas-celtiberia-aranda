@@ -1,168 +1,160 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { UserRegistration, RegistrationResponse } from './models/auth.interfaces';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { Router} from '@angular/router';
+// auth.service.ts
+import { Injectable, Inject } from '@angular/core';
+import { Firestore, doc, setDoc } from 'firebase/firestore';
+import { Router } from '@angular/router';
 import { Observable, from } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import { GoogleAuthProvider } from 'firebase/auth';
-import * as firebase from 'firebase/app';
-import { FacebookAuthProvider } from 'firebase/auth';
-import { OAuthProvider } from 'firebase/auth';
+import { tap, catchError, map } from 'rxjs/operators';
+import { 
+  GoogleAuthProvider, 
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+  onAuthStateChanged,
+  updateProfile,
+  Auth
+} from 'firebase/auth';
+import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from '../firebase.tokens';
 
-interface User {
-  uid?: string;
-  name: string;
-  email: string;
-  createdAt: Date;
+interface AuthResponse {
+  success: boolean;
+  user?: any;
+  message?: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userData: any;
-  
   constructor(
-    private auth: AngularFireAuth,
-    private firestore: AngularFirestore,
+    @Inject(FIREBASE_AUTH) private auth: Auth,
+    @Inject(FIREBASE_FIRESTORE) private firestore: Firestore,
     private router: Router
-  ) {
-    this.auth.authState.subscribe(user => {
-      if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-      } else {
-        localStorage.setItem('user', 'null');
-      }
-    });
-  }
+  ) {}
 
-  setUserData(user: any) {
-    const userKey = this.firestore.createId(); // Genera un ID único
-    
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      name: user.displayName,
-      createdAt: new Date()
-    };
-    
-    return this.firestore.collection('users').add(userData);
-  }
-  //Método para login con email y contraseña
-  loginWithEmailPassword(email: string, password: string) {
-    return this.auth.signInWithEmailAndPassword(email, password);
-  }
-
-  // Método para login
-  login(email: string, password: string): Observable<any> {
-    return from(this.auth.signInWithEmailAndPassword(email, password));
-  }
-
-  // Método para verificar si el usuario está autenticado
-  isAuthenticated(): Observable<boolean> {
-    return this.auth.authState.pipe(
-      map(user => user !== null)
-    );
-  }
-
-  // Método para cerrar sesión
-  logout(): Observable<void> {
-    return from(this.auth.signOut());
-  }
-
-  registerUser(userRegistration: UserRegistration): Observable<RegistrationResponse> {
-    return from(
-      this.auth.createUserWithEmailAndPassword(
-        userRegistration.email,
-        userRegistration.password
-      )
-    ).pipe(
-      switchMap(async (userCredential) => {
-        await this.setUserData({
-          uid: userCredential.user?.uid,
-          email: userCredential.user?.email,
-          displayName: userRegistration.displayName
-        });
-        
-        return {
+  // Registro con email y contraseña
+  registerWithEmail(email: string, password: string, displayName: string): Observable<AuthResponse> {
+    return from(createUserWithEmailAndPassword(this.auth, email, password))
+      .pipe(
+        tap(async (userCredential) => {
+          if (userCredential.user) {
+            await updateProfile(userCredential.user, { displayName });
+            
+            // Guardar información adicional del usuario en Firestore
+            const userRef = doc(this.firestore, `users/${userCredential.user.uid}`);
+            await setDoc(userRef, {
+              email,
+              displayName,
+              photoURL: userCredential.user.photoURL,
+              createdAt: new Date().toISOString()
+            });
+          }
+        }),
+        map(userCredential => ({
           success: true,
           user: userCredential.user
-        };
-      })
-    );
+        })),
+        catchError(error => {
+          console.error('Error en el registro:', error);
+          return from([{
+            success: false,
+            message: this.getErrorMessage(error.code)
+          }]);
+        })
+      );
   }
 
-  async signInWithGoogle(): Promise<RegistrationResponse> {
-    try {
-      const provider = new GoogleAuthProvider();
-      const result = await this.auth.signInWithPopup(provider);
-      
-      await this.setUserData({
-        uid: result.user?.uid,
-        email: result.user?.email,
-        displayName: result.user?.displayName
-      });
-      
-      return {
-        success: true,
-        user: result.user
-      };
-    } catch (error) {
-      console.error('Error en signInWithGoogle:', error);
-      return {
-        success: false,
-        message: 'Error al iniciar sesión con Google'
-      };
-    }
+  // Iniciar sesión con email y contraseña
+  login(email: string, password: string): Observable<AuthResponse> {
+    return from(signInWithEmailAndPassword(this.auth, email, password))
+      .pipe(
+        map(userCredential => ({
+          success: true,
+          user: userCredential.user
+        })),
+        catchError(error => {
+          console.error('Error en el inicio de sesión:', error);
+          return from([{
+            success: false,
+            message: this.getErrorMessage(error.code)
+          }]);
+        })
+      );
   }
 
-  async signInWithFacebook(): Promise<RegistrationResponse> {
-    try {
-      const provider = new FacebookAuthProvider();
-      const result = await this.auth.signInWithPopup(provider);
-      
-      await this.setUserData({
-        uid: result.user?.uid,
-        email: result.user?.email,
-        displayName: result.user?.displayName
-      });
-      
-      return {
-        success: true,
-        user: result.user
-      };
-    } catch (error) {
-      console.error('Error en signInWithFacebook:', error);
-      return {
-        success: false,
-        message: 'Error al iniciar sesión con Facebook'
-      };
-    }
+  // Iniciar sesión con Google
+  signInWithGoogle(): Observable<AuthResponse> {
+    const provider = new GoogleAuthProvider();
+    
+    return from(signInWithPopup(this.auth, provider))
+      .pipe(
+        tap(async (result) => {
+          if (result.user) {
+            const userRef = doc(this.firestore, `users/${result.user.uid}`);
+            await setDoc(userRef, {
+              email: result.user.email,
+              displayName: result.user.displayName,
+              photoURL: result.user.photoURL,
+              createdAt: new Date().toISOString()
+            }, { merge: true });
+          }
+        }),
+        map(result => ({
+          success: true,
+          user: result.user
+        })),
+        catchError(error => {
+          console.error('Error en el inicio de sesión con Google:', error);
+          return from([{
+            success: false,
+            message: this.getErrorMessage(error.code)
+          }]);
+        })
+      );
   }
 
-  async signInWithApple(): Promise<RegistrationResponse> {
-    try {
-      const provider = new OAuthProvider('apple.com');
-      const result = await this.auth.signInWithPopup(provider);
-      
-      await this.setUserData({
-        uid: result.user?.uid,
-        email: result.user?.email,
-        displayName: result.user?.displayName
-      });
-      
-      return {
-        success: true,
-        user: result.user
-      };
-    } catch (error) {
-      console.error('Error en signInWithApple:', error);
-      return {
-        success: false,
-        message: 'Error al iniciar sesión con Apple'
-      };
+  // Cerrar sesión
+  logout(): Observable<void> {
+    return from(signOut(this.auth));
+  }
+
+  // Recuperar contraseña
+  resetPassword(email: string): Observable<AuthResponse> {
+    return from(sendPasswordResetEmail(this.auth, email))
+      .pipe(
+        map(() => ({
+          success: true,
+          message: 'Se ha enviado un correo para restablecer tu contraseña'
+        })),
+        catchError(error => {
+          console.error('Error al enviar el correo de recuperación:', error);
+          return from([{
+            success: false,
+            message: this.getErrorMessage(error.code)
+          }]);
+        })
+      );
+  }
+
+  private getErrorMessage(errorCode: string): string {
+    switch (errorCode) {
+      case 'auth/email-already-in-use':
+        return 'Este correo electrónico ya está registrado';
+      case 'auth/invalid-email':
+        return 'El correo electrónico no es válido';
+      case 'auth/operation-not-allowed':
+        return 'Esta operación no está permitida';
+      case 'auth/weak-password':
+        return 'La contraseña es demasiado débil';
+      case 'auth/user-disabled':
+        return 'Esta cuenta ha sido deshabilitada';
+      case 'auth/user-not-found':
+        return 'No se encontró ningún usuario con este correo';
+      case 'auth/wrong-password':
+        return 'Contraseña incorrecta';
+      default:
+        return 'Ha ocurrido un error inesperado';
     }
   }
 }

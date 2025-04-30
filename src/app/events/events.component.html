@@ -1,0 +1,75 @@
+<section class="hero-event">
+  <div class="hero-background" [style.backgroundImage]="'url(' + evento.imagenUrl + ')'">
+
+    <div class="hero-overlay">
+      <h1>{{ evento.titulo }}</h1>
+      <p>{{ evento.subtitulo }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- Sección de imagen de cabecera -->
+<section class="imagen-cabecera">
+  <div class="imagen-cabecera-overlay">
+    <img 
+      src="assets/events/cabeceraBeltaine2.jpeg" 
+      alt="Imagen de cabecera del evento Beltaine" 
+      class="imagen-cabecera" 
+    />
+  </div>
+</section>
+  
+<!-- Sección de detalles del evento -->
+
+<section class="evento-detalles">
+  <h2>{{ evento.lugar }}</h2>
+  <p><strong>Fecha:</strong> {{ evento.fecha }}</p>
+
+  <ul class="actividades">
+    <li *ngFor="let actividad of evento.actividades">
+      <strong>{{ actividad.hora }}:</strong> {{ actividad.descripcion }}
+    </li>
+  </ul>
+
+  <p class="nota">{{ evento.nota }}</p>
+</section>
+
+<section class="evento-logos">
+  <h4>Organiza y Colabora:</h4>
+  <div class="logos-container">
+    <img *ngFor="let logo of evento.logos" [src]="logo" alt="Logo">
+  </div>
+</section>
+
+<!-- footer section-->
+
+<footer class="footer-main">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h4>Explora Ar-anda</h4>
+      <p>Descubre rutas ancestrales y tesoros arqueologicos<p>
+
+        <div class="footer-sugeridos">
+        <a href="https://www.turismodelaranda.es" target="_blank">www.turismodelaranda.es</a><br>
+        <a href="https://www.comarcadelaranda.com" target="_blank">www.comarcadelaranda.com</a>
+          </div>
+          
+    </div>
+    <div class="footer-links">
+      <a routerLink="/politicas/privacidad">Privacidad</a>
+      <a routerLink="/politicas/terminos">Terminos</a>
+      <a routerLink="/politicas/cookies">Cookies</a>
+    </div>
+  </div>
+
+  <!-- Logos institucionales --> 
+  <div class="footer-logos">
+    <img src="assets/footer/FOOTER_PST.jpg" alt="Logotipos institucionales" />
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Ar-anda. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<app-navigation-footer></app-navigation-footer>

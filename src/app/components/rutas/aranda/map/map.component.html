@@ -7,16 +7,19 @@
     <h3>Explora las Rutas</h3>
     <ul>
       <li>
-        <button (click)="loadRoute('valleAranda')" class="btn btn-primary">Ruta: Valle del Aranda</button>
+        <button (click)="selectRoute('ruta1')" class="btn btn-primary">Ruta: Valle del Aranda</button>
       </li>
       <li>
-        <button (click)="loadRoute('aratis')" class="btn btn-success">Ruta: Aratis</button>
+        <button (click)="selectRoute('ruta2')" class="btn btn-success">Ruta: Aratis</button>
       </li>
       <li>
-        <button (click)="loadRoute('oseja')" class="btn btn-success">Ruta: Oseja</button>
+        <button (click)="selectRoute('ruta3')" class="btn btn-success">Ruta: Oseja</button>
       </li>
       <li>
-        <button (click)="loadRoute('bosqueSagrado')" class="btn btn-warning">Ruta: Bosque Sagrado</button>
+        <button (click)="selectRoute('ruta4')" class="btn btn-warning">Ruta: Bosque Sagrado</button>
+      </li>
+      <li>
+        <button (click)="selectRoute('ruta5')" class="btn btn-success">Ruta: Tierga</button>
       </li>
     </ul>
   </div>
@@ -26,7 +29,7 @@
 <div class="container mt-4" *ngIf="selectedRoute">
   <div class="row">
     <div class="col-md-6">
-      <h1>{{ selectedRoute.title }}</h1>
+      <h1>{{ selectedRoute.name }}</h1>
       <h3>Descripción:</h3>
       <p>{{ selectedRoute.description }}</p>
       <h5>Puntos de interés:</h5>
@@ -46,3 +49,4 @@
     </div>
   </div>
 </div>
+<app-navigation-footer></app-navigation-footer>

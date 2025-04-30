@@ -1,0 +1,92 @@
+<div class="header">
+  <h1>Ruta de la Celtiberia: valle del Isuela</h1>
+  </div>
+
+<div class="map-container">
+  <div id="map" class="map"></div>
+</div>
+
+<div class="cards-wrapper">
+  <h3>Puntos de Interés</h3>
+  <div class="cards">
+    <div class="card" *ngFor="let punto of puntos" (click)="centrarEnPunto(punto)">
+      <img [src]="punto.imagen || 'https://via.placeholder.com/400x200?text=Sin+Imagen'" alt="Imagen de {{ punto.nombre }}" />
+      <div class="card-content">
+        <h4>{{ punto.nombre }}</h4>
+        <p>{{ punto.descripcion }}</p>
+      </div>
+    </div>
+  </div>
+  
+ <!--- Reproductor-->
+ <div class="audio-player-container">
+  <h3>Audios de la Ruta</h3>
+  <div class="audio-player">
+    <div class="audio-info">
+      <h4>{{ currentAudio?.title || 'Selecciona un audio' }}</h4>
+      <p>{{ currentAudio?.description || 'Escucha los sonidos de la ruta' }}</p>
+    </div>
+    <div class="audio-controls">
+      <button class="btn btn-outline-primary" (click)="previousAudio()" [disabled]="!hasPreviousAudio()">
+        <i class="bi bi-skip-start-fill"></i>
+      </button>
+      <button class="btn btn-primary" (click)="togglePlay()">
+        <i class="bi" [class.bi-play-fill]="!isPlaying" [class.bi-pause-fill]="isPlaying"></i>
+      </button>
+      <button class="btn btn-outline-primary" (click)="nextAudio()" [disabled]="!hasNextAudio()">
+        <i class="bi bi-skip-end-fill"></i>
+      </button>
+    </div>
+    <div class="audio-progress">
+      <div class="progress-bar" [style.width]="progress + '%'"></div>
+    </div>
+    <div class="audio-time">
+      <span>{{ currentTime | date:'mm:ss' }}</span>
+      <span>{{ duration | date:'mm:ss' }}</span>
+    </div>
+  </div>
+</div>
+
+  <!--- Naturaleza info-->
+</div>
+<div class="ver-mas">
+  <button routerLink="/naturaleza">Ampliar información sobre la ruta</button>
+  </div>
+
+  <!--- Trekking info-->
+  <app-trekking-info
+  [title]="'Ruta del Valle del Isuela'"
+  [distance]="'16-18 km'"
+  [difficulty]="'Moderada-Alta'"
+  [duration]="'5.5–6.5 horas'"
+  [elevation]="'600 m (Purujosa y Beratón están más elevadas)'"
+  [season]="'Primavera y otoño (en verano puede hacer mucho calor)'"
+  [equipment]="['Botas de senderismo', 'Agua (mín. 2L)', 'Protección solar', 'Chaqueta ligera', 'Bastones (opcional)']"
+  [tips]="'Algunos tramos empinados y zonas con piedra suelta. Llevar agua extra.'"
+/>
+
+<!-- Footer --> 
+  <footer class="footer-main">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h4>Explora Ar-anda</h4>
+        <p>Descubre rutas ancestrales y tesoros arqueologicos<p>
+      </div>
+      <div class="footer-links">
+        <a routerLink="/politicas/privacidad">Privacidad</a>
+        <a routerLink="/politicas/terminos">Terminos</a>
+        <a routerLink="/politicas/cookies">Cookies</a>
+      </div>
+    </div>
+
+    <!-- Logos institucionales --> 
+    <div class="footer-logos">
+      <img src="assets/footer/FOOTER_PST.jpg" alt="Logotipos institucionales" />
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Ar-anda. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  
+<app-navigation-footer></app-navigation-footer>
