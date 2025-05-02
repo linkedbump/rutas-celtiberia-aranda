@@ -44,6 +44,28 @@
   height: 50%;
   z-index: 2;
 }
+/* media queries */
+@media (max-width: 768px) {
+  .Natura-Hero {
+    height: 30vh;
+    min-height: 30vh;
+  }
+
+  .Natura-Hero img,
+  .Natura-Hero-overlay {
+    height: 30%;
+    width: 100%;
+  }
+
+  .Natura-Hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .Natura-Hero p {
+    font-size: 1.2rem;
+  }
+}
+
 
 
 section {

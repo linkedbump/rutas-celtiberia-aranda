@@ -17,7 +17,7 @@ interface MenuItem {
   <div class="menu-wrapper">
   <div class="menu-carousel">
                 <div class="menu-header">
-                  <h2>Descurbe</h2>
+                  <h2>Descubre</h2>
                   <p>Lo que tiene para ofrecer</p>
                 </div>
 
@@ -52,8 +52,8 @@ interface MenuItem {
     padding-top: 100px;
     padding-bottom: 100px;
     text-align: left;
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
     
   }
   .menu-header {
@@ -168,7 +168,7 @@ interface MenuItem {
 /* Media queries */
 @media (max-width: 768px) {
       .menu-items {
-        min-width: calc(60px * 4);
+        min-width: calc(60px * 3);
         padding: 0 5px;
       }
 
@@ -202,8 +202,8 @@ interface MenuItem {
       }
 
       .menu-item {
-        width: calc(100% / 3); /* Mostrar 2.5 elementos por vista*/
-        min-width: 70px;
+        width: calc(100% / 3); 
+        max-width: 70px;
       }
 
       .icon-circle {
