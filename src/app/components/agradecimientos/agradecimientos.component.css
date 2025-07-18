@@ -1,0 +1,28 @@
+.agradecimientos {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem 1rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  text-align: center;
+}
+.agradecimientos h1 {
+  color: #2a5298;
+  margin-bottom: 1.5rem;
+}
+.agradecimientos ul {
+  list-style: disc inside;
+  margin: 1.5rem 0;
+  padding: 0;
+  text-align: left;
+}
+.agradecimientos li {
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-size: 1.05rem;
+}
+.agradecimientos p {
+  color: #444;
+  font-size: 1.1rem;
+} 

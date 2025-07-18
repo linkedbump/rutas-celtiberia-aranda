@@ -1,0 +1,75 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.649363,
+          41.547811
+        ]
+      },
+      "properties": {
+        "name": "Tótem Gotor",
+        "popup": "— Tótem Gotor — Un punto de información física que amplia la ruta."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.6071008828047464,
+          41.60745297917092
+        ]
+      },
+      "properties": {
+        "name": "Tótem Tierga",
+        "popup": "— Tótem Tierga — Un punto de información física que amplia la ruta."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.700204967309357,
+          41.59650386491256
+        ]
+      },
+      "properties": {
+        "name": "QR Oseja",
+        "popup": "QR Oseja — Un qr que amplia la ruta."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.6905402182373759,
+          41.5561802257362
+        ]
+      },
+      "properties": {
+        "name": "QR Aranda (Aratis)",
+        "popup": "QR Aranda (Aratis) — Un qr que amplia la ruta."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.7173967645986719,
+          41.655750890604615
+        ]
+      },
+      "properties": {
+        "name": "QR Calcena",
+        "popup": "QR Calcena — Un qr que amplia la ruta."
+      }
+    }
+  ]
+}
